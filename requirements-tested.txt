@@ -1,0 +1,12 @@
+# Direct CPU/test dependency versions used for the shipped local evidence.
+# Python3.12.15 / macOS arm64. This is not a cross-platform full transitive lock.
+numpy==2.5.4
+scipy==1.18.1
+opencv-python-headless==5.0.0.93
+fastapi==0.162.0
+uvicorn==0.54.0
+python-multipart==0.0.32
+matplotlib==3.11.2
+imageio-ffmpeg==0.6.0
+pytest==9.1.1
+httpx==0.28.1

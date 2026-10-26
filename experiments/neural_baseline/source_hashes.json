@@ -1,0 +1,8 @@
+{
+  "vibescope/motion.py": "c71d088fe7f0c3d9fc5871369dad8d03b68c5f890b71385ca60607d3e7ad02de",
+  "vibescope/learned.py": "6995980c8fb348561681018bd2413244d07b3661a8ef717d53b4caac4e12630b",
+  "vibescope/signals.py": "9d0071e36367ae5548be56eb1e8ab7e4d12fd40fea4d3971dccc6db2f21960b3",
+  "vibescope/models/noise_fusion.npz": "194fb84f67d2b52ef94a207cf655f8c09a7114bae0f1e926c6fd144b407589d8",
+  "scripts/run_neural_baseline.py": "f2c4aea2aceee3c3bfe72d2724e3e1df89c2ffe8efc4265261d5854c3d1cbc21",
+  "scripts/benchmark_neural.py": "0b89819ec0262c1c6ae74ae948424a0fbb98321741ac54bc30e94fcde510e446"
+}

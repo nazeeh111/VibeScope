@@ -1,0 +1,211 @@
+{
+  "model": "noise-fusion-mlp-v1",
+  "architecture": "12-24-2 tanh residual MLP",
+  "trainable_parameters": 362,
+  "feature_names": [
+    "middle_dx",
+    "middle_dy",
+    "fine_delta_x",
+    "fine_delta_y",
+    "coarse_delta_x",
+    "coarse_delta_y",
+    "log_noise_gradient_ratio",
+    "log_gradient_rms",
+    "eigenvalue_ratio",
+    "gradient_correlation",
+    "relative_residual",
+    "brightness_offset"
+  ],
+  "train": {
+    "seed_start": 10000,
+    "count": 10000
+  },
+  "calibration": {
+    "seed_start": 300000,
+    "count": 1000,
+    "metrics": {
+      "noise_fusion": {
+        "vector_rmse_px": 0.07661721880173299,
+        "median_endpoint_error_px": 0.039664655033262095,
+        "p95_endpoint_error_px": 0.15664172278579824,
+        "bias_x_px": -0.0015225131375242573,
+        "bias_y_px": -0.0022686479296042555
+      },
+      "without_learned_calibration": {
+        "vector_rmse_px": 0.08238472715532213,
+        "median_endpoint_error_px": 0.04693600827861277,
+        "p95_endpoint_error_px": 0.170201615725976,
+        "bias_x_px": 0.0012150221379239154,
+        "bias_y_px": 0.00039014856884265337
+      },
+      "by_noise": [
+        {
+          "range": [
+            0,
+            0.015
+          ],
+          "n": 271,
+          "noise_fusion": {
+            "vector_rmse_px": 0.029228596721318823,
+            "median_endpoint_error_px": 0.018480017446010785,
+            "p95_endpoint_error_px": 0.05148434491508129,
+            "bias_x_px": -0.00013017127984929356,
+            "bias_y_px": -6.336268331407319e-05
+          },
+          "without_learned_calibration": {
+            "vector_rmse_px": 0.038954045872342066,
+            "median_endpoint_error_px": 0.023041661969496457,
+            "p95_endpoint_error_px": 0.07552434149776488,
+            "bias_x_px": 0.001969962867105647,
+            "bias_y_px": 0.0005495599648591422
+          }
+        },
+        {
+          "range": [
+            0.015,
+            0.035
+          ],
+          "n": 368,
+          "noise_fusion": {
+            "vector_rmse_px": 0.0600508551856681,
+            "median_endpoint_error_px": 0.039664655033262095,
+            "p95_endpoint_error_px": 0.11000027009907642,
+            "bias_x_px": 0.0016576482167573773,
+            "bias_y_px": -0.0010312289091413275
+          },
+          "without_learned_calibration": {
+            "vector_rmse_px": 0.06831447149791443,
+            "median_endpoint_error_px": 0.04581924939638139,
+            "p95_endpoint_error_px": 0.1313683111001419,
+            "bias_x_px": 0.0014720149991728287,
+            "bias_y_px": 0.0008533850036278233
+          }
+        },
+        {
+          "range": [
+            0.035,
+            0.056
+          ],
+          "n": 361,
+          "noise_fusion": {
+            "vector_rmse_px": 0.1092866982983289,
+            "median_endpoint_error_px": 0.06891513863941257,
+            "p95_endpoint_error_px": 0.21355635109486149,
+            "bias_x_px": -0.005809560289340205,
+            "bias_y_px": -0.005185552365269067
+          },
+          "without_learned_calibration": {
+            "vector_rmse_px": 0.11359909109469142,
+            "median_endpoint_error_px": 0.07696863316565698,
+            "p95_endpoint_error_px": 0.23567784489096708,
+            "bias_x_px": 0.0003863176765725324,
+            "bias_y_px": -0.00020173923260169654
+          }
+        }
+      ]
+    }
+  },
+  "test": {
+    "seed_start": 600000,
+    "count": 1500,
+    "metrics": {
+      "noise_fusion": {
+        "vector_rmse_px": 0.07704697860272001,
+        "median_endpoint_error_px": 0.04177057628663304,
+        "p95_endpoint_error_px": 0.15580571972494195,
+        "bias_x_px": -0.000946155000941203,
+        "bias_y_px": -0.0014178488667086586
+      },
+      "without_learned_calibration": {
+        "vector_rmse_px": 0.08427644411680807,
+        "median_endpoint_error_px": 0.048593364872378586,
+        "p95_endpoint_error_px": 0.17182003039850122,
+        "bias_x_px": 0.00016520126892735388,
+        "bias_y_px": -0.0004253250244159111
+      },
+      "by_noise": [
+        {
+          "range": [
+            0,
+            0.015
+          ],
+          "n": 382,
+          "noise_fusion": {
+            "vector_rmse_px": 0.02714249873098237,
+            "median_endpoint_error_px": 0.01918592828567705,
+            "p95_endpoint_error_px": 0.04960463251064594,
+            "bias_x_px": -0.0007581577747654005,
+            "bias_y_px": -0.0001916201816870948
+          },
+          "without_learned_calibration": {
+            "vector_rmse_px": 0.033990585493915,
+            "median_endpoint_error_px": 0.022414221075402505,
+            "p95_endpoint_error_px": 0.06938663892353532,
+            "bias_x_px": -0.0004988398632942409,
+            "bias_y_px": -0.00015982718303232327
+          }
+        },
+        {
+          "range": [
+            0.015,
+            0.035
+          ],
+          "n": 566,
+          "noise_fusion": {
+            "vector_rmse_px": 0.06270436130593593,
+            "median_endpoint_error_px": 0.041265602155937955,
+            "p95_endpoint_error_px": 0.1214957343716381,
+            "bias_x_px": 0.0021157817251411014,
+            "bias_y_px": -0.0020326597779861066
+          },
+          "without_learned_calibration": {
+            "vector_rmse_px": 0.06937471986141769,
+            "median_endpoint_error_px": 0.047586623351372453,
+            "p95_endpoint_error_px": 0.1293620527360736,
+            "bias_x_px": 0.002923275482596894,
+            "bias_y_px": -0.0005045428079867883
+          }
+        },
+        {
+          "range": [
+            0.035,
+            0.056
+          ],
+          "n": 552,
+          "noise_fusion": {
+            "vector_rmse_px": 0.10765543570960578,
+            "median_endpoint_error_px": 0.07337238410103017,
+            "p95_endpoint_error_px": 0.20508043037772372,
+            "bias_x_px": -0.004215849072248705,
+            "bias_y_px": -0.001636030717968083
+          },
+          "without_learned_calibration": {
+            "vector_rmse_px": 0.1164725893999274,
+            "median_endpoint_error_px": 0.08035019362925437,
+            "p95_endpoint_error_px": 0.23434406376694428,
+            "bias_x_px": -0.0022032883912688605,
+            "bias_y_px": -0.0005278302959873133
+          }
+        }
+      ]
+    }
+  },
+  "optimizer": "NumPy Adam; robust displacement loss; L2 2e-5",
+  "epochs": 140,
+  "optimizer_seed": 20261025,
+  "max_shift_per_axis_px": 0.95,
+  "noise_sigma_range": [
+    0,
+    0.055
+  ],
+  "error_scale_px": 0.1153455192699483,
+  "elapsed_seconds": 257.00150270794984,
+  "weights_sha256": "194fb84f67d2b52ef94a207cf655f8c09a7114bae0f1e926c6fd144b407589d8",
+  "evidence_scope": "Controlled synthetic translated patches only; no real-world validation.",
+  "limitations": [
+    "Rigid translation only",
+    "No out-of-plane/rolling-shutter/occlusion correction",
+    "Synthetic error scale is not a confidence interval",
+    "No claim of publication-level novelty"
+  ]
+}

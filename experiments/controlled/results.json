@@ -1,0 +1,2741 @@
+{
+  "status": "complete",
+  "evidence_scope": "Controlled synthetic tests only; no independent physical validation.",
+  "quick": false,
+  "fps": 60.0,
+  "frequency_hz": 7.3,
+  "amplitude_px": 0.25,
+  "shape": [
+    64,
+    64
+  ],
+  "source_hashes": {
+    "vibescope/motion.py": "c71d088fe7f0c3d9fc5871369dad8d03b68c5f890b71385ca60607d3e7ad02de",
+    "vibescope/learned.py": "6995980c8fb348561681018bd2413244d07b3661a8ef717d53b4caac4e12630b",
+    "vibescope/signals.py": "9d0071e36367ae5548be56eb1e8ab7e4d12fd40fea4d3971dccc6db2f21960b3",
+    "vibescope/anomaly.py": "043b7732311f817b4edc27f20c38e78ae403c9737929734a5cb33f3348a6b22a",
+    "vibescope/models/noise_fusion.npz": "194fb84f67d2b52ef94a207cf655f8c09a7114bae0f1e926c6fd144b407589d8",
+    "scripts/benchmark.py": "a059a1dfb8c3d59faf51180d348ea39386643ec9182eaa6b9041bc05c9869909"
+  },
+  "source_changed_during_run": false,
+  "environment": {
+    "python": "3.12.15",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "blas_threads": "1"
+  },
+  "rows": [
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 4.387709106653575e-05,
+      "displacement_bias_px": 1.8322141588576372e-05,
+      "signal_to_error_db": 72.10729491005891,
+      "frequency_hz": 7.300000230397212,
+      "frequency_error_hz": 2.3039721241957523e-07,
+      "amplitude_px": 0.25005875466792454,
+      "amplitude_abs_error_px": 5.87546679245432e-05,
+      "quality_median": 0.9983803510162874,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 7.681563242284982,
+      "elapsed_inference_s": 23.432730333996005,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.020583976208789462,
+      "displacement_bias_px": 0.00011817857005247821,
+      "signal_to_error_db": 18.681466031217305,
+      "frequency_hz": 7.300000409860049,
+      "frequency_error_hz": 4.098600490110016e-07,
+      "amplitude_px": 0.279098155869005,
+      "amplitude_abs_error_px": 0.029098155869004994,
+      "quality_median": 0.9938826493067205,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 28.705331918638528,
+      "elapsed_inference_s": 6.270612042048015,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.008717495834052864,
+      "displacement_bias_px": 0.001852130821235484,
+      "signal_to_error_db": 26.144216485893605,
+      "frequency_hz": 7.300150669797943,
+      "frequency_error_hz": 0.00015066979794298163,
+      "amplitude_px": 0.2612206532852228,
+      "amplitude_abs_error_px": 0.011220653285222815,
+      "quality_median": 0.9883372137381341,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 30.966008504923337,
+      "elapsed_inference_s": 5.81282537500374,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.00016194767426620018,
+      "displacement_bias_px": 7.1998090293953794e-06,
+      "signal_to_error_db": 60.76455714642762,
+      "frequency_hz": 7.299999917839984,
+      "frequency_error_hz": 8.216001567973308e-08,
+      "amplitude_px": 0.25001667508448894,
+      "amplitude_abs_error_px": 1.6675084488937397e-05,
+      "quality_median": 0.9883372137381341,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 159.54444148456858,
+      "elapsed_inference_s": 1.1282122919801623,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 4.226906814000724e-05,
+      "displacement_bias_px": 1.4177755670761844e-05,
+      "signal_to_error_db": 72.43159798564565,
+      "frequency_hz": 7.300000160090653,
+      "frequency_error_hz": 1.6009065273436818e-07,
+      "amplitude_px": 0.2500573326118248,
+      "amplitude_abs_error_px": 5.7332611824778557e-05,
+      "quality_median": 0.9983816162290993,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 37.67227610377073,
+      "elapsed_inference_s": 4.778049499960616,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.02025585741107575,
+      "displacement_bias_px": -3.8268513622724776e-05,
+      "signal_to_error_db": 18.821038832434986,
+      "frequency_hz": 7.299998180925387,
+      "frequency_error_hz": 1.8190746127189072e-06,
+      "amplitude_px": 0.27863398218636026,
+      "amplitude_abs_error_px": 0.028633982186360263,
+      "quality_median": 0.9943822226463372,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 67.87735354068346,
+      "elapsed_inference_s": 2.65184175001923,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.0026427131669357977,
+      "displacement_bias_px": 0.0071663500889271314,
+      "signal_to_error_db": 36.51105088559869,
+      "frequency_hz": 7.299922273722775,
+      "frequency_error_hz": 7.772627722513192e-05,
+      "amplitude_px": 0.25194630040538385,
+      "amplitude_abs_error_px": 0.0019463004053838495,
+      "quality_median": 0.9878850566512549,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 299.79823978593436,
+      "elapsed_inference_s": 0.6004037919919938,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.00017141686213293606,
+      "displacement_bias_px": 2.764924857699698e-06,
+      "signal_to_error_db": 60.270980638563415,
+      "frequency_hz": 7.299999840330986,
+      "frequency_error_hz": 1.5966901401043287e-07,
+      "amplitude_px": 0.25001208709026607,
+      "amplitude_abs_error_px": 1.2087090266066358e-05,
+      "quality_median": 0.9878850566512549,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 138.70204867150076,
+      "elapsed_inference_s": 1.2977457919623703,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.002628048970275722,
+      "displacement_bias_px": 0.0038990412886941894,
+      "signal_to_error_db": 36.5593823864885,
+      "frequency_hz": 7.299793632654685,
+      "frequency_error_hz": 0.00020636734531453982,
+      "amplitude_px": 0.25018130508045106,
+      "amplitude_abs_error_px": 0.0001813050804510552,
+      "quality_median": 0.9567800498565346,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 89.28235769316012,
+      "elapsed_inference_s": 2.016075792023912,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.021209429875017803,
+      "displacement_bias_px": 0.002671321363775509,
+      "signal_to_error_db": 18.421471565606655,
+      "frequency_hz": 7.299851519744207,
+      "frequency_error_hz": 0.00014848025579272672,
+      "amplitude_px": 0.2795410182510594,
+      "amplitude_abs_error_px": 0.029541018251059425,
+      "quality_median": 0.9716951233033361,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 299.3388975303138,
+      "elapsed_inference_s": 0.6013251250842586,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.007736219036101929,
+      "displacement_bias_px": 0.006494206936891392,
+      "signal_to_error_db": 27.181476306840384,
+      "frequency_hz": 7.300070912720104,
+      "frequency_error_hz": 7.0912720103955e-05,
+      "amplitude_px": 0.2598694933626776,
+      "amplitude_abs_error_px": 0.009869493362677617,
+      "quality_median": 0.8700231052354515,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 271.4532418896735,
+      "elapsed_inference_s": 0.6630976250162348,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.003311746999123748,
+      "displacement_bias_px": 0.0048453075214158255,
+      "signal_to_error_db": 34.55090842685514,
+      "frequency_hz": 7.299767784756498,
+      "frequency_error_hz": 0.00023221524350169886,
+      "amplitude_px": 0.2500987393919787,
+      "amplitude_abs_error_px": 9.873939197868609e-05,
+      "quality_median": 0.8700231052354515,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 127.69484152091754,
+      "elapsed_inference_s": 1.4096105829812586,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.0025418937979359963,
+      "displacement_bias_px": 0.001399947021100283,
+      "signal_to_error_db": 36.848903426489755,
+      "frequency_hz": 7.299824537437795,
+      "frequency_error_hz": 0.00017546256220501988,
+      "amplitude_px": 0.2502164434940708,
+      "amplitude_abs_error_px": 0.00021644349407079488,
+      "quality_median": 0.9567044730001828,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 88.62290345786012,
+      "elapsed_inference_s": 2.0310776670230553,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.020446982458336527,
+      "displacement_bias_px": -0.0015413978281746817,
+      "signal_to_error_db": 18.739466967960993,
+      "frequency_hz": 7.299617873460128,
+      "frequency_error_hz": 0.0003821265398720186,
+      "amplitude_px": 0.27844555138683014,
+      "amplitude_abs_error_px": 0.028445551386830137,
+      "quality_median": 0.9715455108997004,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 283.30159402242646,
+      "elapsed_inference_s": 0.6353652919642627,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.002957921626282849,
+      "displacement_bias_px": 0.003817198682845081,
+      "signal_to_error_db": 35.53231820291477,
+      "frequency_hz": 7.2995469252918275,
+      "frequency_error_hz": 0.00045307470817235185,
+      "amplitude_px": 0.2508181694939935,
+      "amplitude_abs_error_px": 0.0008181694939934925,
+      "quality_median": 0.8699847937577647,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 318.32645173914614,
+      "elapsed_inference_s": 0.5654572499915957,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.002996073907554737,
+      "displacement_bias_px": 0.0016239118982025443,
+      "signal_to_error_db": 35.421001008124826,
+      "frequency_hz": 7.299695555439725,
+      "frequency_error_hz": 0.0003044445602746748,
+      "amplitude_px": 0.2502493387105976,
+      "amplitude_abs_error_px": 0.00024933871059762414,
+      "quality_median": 0.8699847937577647,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 216.25717313560747,
+      "elapsed_inference_s": 0.8323423329275101,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.01058990547513305,
+      "displacement_bias_px": 0.01485568968453383,
+      "signal_to_error_db": 24.45420978325085,
+      "frequency_hz": 7.299148042820074,
+      "frequency_error_hz": 0.0008519571799254777,
+      "amplitude_px": 0.2500323098638492,
+      "amplitude_abs_error_px": 3.230986384922252e-05,
+      "quality_median": 0.8292631018943588,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 34.03455172138013,
+      "elapsed_inference_s": 5.288743083016016,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.0261637144383273,
+      "displacement_bias_px": 0.010446634160813964,
+      "signal_to_error_db": 16.59806344771182,
+      "frequency_hz": 7.299367477883518,
+      "frequency_error_hz": 0.000632522116482015,
+      "amplitude_px": 0.28071973224646746,
+      "amplitude_abs_error_px": 0.030719732246467457,
+      "quality_median": 0.890625424880678,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 374.8414732828793,
+      "elapsed_inference_s": 0.4802030000137165,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.011565440139295306,
+      "displacement_bias_px": 0.013869794478228389,
+      "signal_to_error_db": 23.68880815368895,
+      "frequency_hz": 7.299462024103876,
+      "frequency_error_hz": 0.0005379758961234771,
+      "amplitude_px": 0.2532550856219518,
+      "amplitude_abs_error_px": 0.0032550856219518143,
+      "quality_median": 0.5809526301606729,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 284.94982097448883,
+      "elapsed_inference_s": 0.6316901670070365,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.013192383217032541,
+      "displacement_bias_px": 0.01918160406588878,
+      "signal_to_error_db": 22.545586288811172,
+      "frequency_hz": 7.299018197955103,
+      "frequency_error_hz": 0.000981802044896618,
+      "amplitude_px": 0.24877024803213613,
+      "amplitude_abs_error_px": 0.0012297519678638735,
+      "quality_median": 0.5809526301606729,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 358.2580305075246,
+      "elapsed_inference_s": 0.5024311660090461,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.010166645038807553,
+      "displacement_bias_px": 0.005535083092458769,
+      "signal_to_error_db": 24.808498241246127,
+      "frequency_hz": 7.299221327193167,
+      "frequency_error_hz": 0.0007786728068328586,
+      "amplitude_px": 0.2501585289602185,
+      "amplitude_abs_error_px": 0.00015852896021850693,
+      "quality_median": 0.8291438536754578,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 100.3386452115637,
+      "elapsed_inference_s": 1.7939249590272084,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.024459882205054254,
+      "displacement_bias_px": -0.004878883730312126,
+      "signal_to_error_db": 17.182964231784183,
+      "frequency_hz": 7.298375098972453,
+      "frequency_error_hz": 0.0016249010275464215,
+      "amplitude_px": 0.27765664358107345,
+      "amplitude_abs_error_px": 0.027656643581073448,
+      "quality_median": 0.8895107118670518,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 107.77432061824037,
+      "elapsed_inference_s": 1.6701566659612581,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.011050078669362877,
+      "displacement_bias_px": 0.0033300076278386685,
+      "signal_to_error_db": 24.084744057492266,
+      "frequency_hz": 7.2985821561918724,
+      "frequency_error_hz": 0.0014178438081273725,
+      "amplitude_px": 0.24618233132787679,
+      "amplitude_abs_error_px": 0.0038176686721232145,
+      "quality_median": 0.5809920752557151,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 141.85105580222753,
+      "elapsed_inference_s": 1.2689366249833256,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82101,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.011875087386830564,
+      "displacement_bias_px": 0.006493354810127911,
+      "signal_to_error_db": 23.459315171793882,
+      "frequency_hz": 7.298751456077983,
+      "frequency_error_hz": 0.0012485439220171202,
+      "amplitude_px": 0.2494399159427199,
+      "amplitude_abs_error_px": 0.0005600840572801136,
+      "quality_median": 0.5809920752557151,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 379.78302376233864,
+      "elapsed_inference_s": 0.47395483404397964,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 4.3425439092300366e-05,
+      "displacement_bias_px": 2.6796398809323523e-05,
+      "signal_to_error_db": 72.19716708661747,
+      "frequency_hz": 7.30000036633148,
+      "frequency_error_hz": 3.6633147981746106e-07,
+      "amplitude_px": 0.25005542207237397,
+      "amplitude_abs_error_px": 5.5422072373967346e-05,
+      "quality_median": 0.9983460532618398,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 42.88546002344738,
+      "elapsed_inference_s": 4.197226750082336,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.018370666497373424,
+      "displacement_bias_px": -1.7462235077168374e-05,
+      "signal_to_error_db": 19.669553195567286,
+      "frequency_hz": 7.299998612720448,
+      "frequency_error_hz": 1.3872795516789438e-06,
+      "amplitude_px": 0.2759691528211285,
+      "amplitude_abs_error_px": 0.025969152821128494,
+      "quality_median": 0.9945814939228883,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 97.41271377696879,
+      "elapsed_inference_s": 1.8478080839850008,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.007996942766799929,
+      "displacement_bias_px": -0.0033537075316233795,
+      "signal_to_error_db": 26.893571699357746,
+      "frequency_hz": 7.3001533157812215,
+      "frequency_error_hz": 0.00015331578122168565,
+      "amplitude_px": 0.2599462205296157,
+      "amplitude_abs_error_px": 0.00994622052961569,
+      "quality_median": 0.9887167268108985,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 97.11920168201276,
+      "elapsed_inference_s": 1.8533924999646842,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.00015211561580244184,
+      "displacement_bias_px": -1.2700345905788703e-05,
+      "signal_to_error_db": 61.308575457829576,
+      "frequency_hz": 7.299999636925287,
+      "frequency_error_hz": 3.6307471251717516e-07,
+      "amplitude_px": 0.2500539737677226,
+      "amplitude_abs_error_px": 5.397376772259266e-05,
+      "quality_median": 0.9887167268108985,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 231.51635335700718,
+      "elapsed_inference_s": 0.777482874924317,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 4.122605656410341e-05,
+      "displacement_bias_px": -1.6099465193180383e-05,
+      "signal_to_error_db": 72.64861556006038,
+      "frequency_hz": 7.299999752556992,
+      "frequency_error_hz": 2.4744300741730285e-07,
+      "amplitude_px": 0.2500553602284328,
+      "amplitude_abs_error_px": 5.536022843277699e-05,
+      "quality_median": 0.9983285597689198,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 68.62031564356838,
+      "elapsed_inference_s": 2.6231298750499263,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.020400193065332684,
+      "displacement_bias_px": 0.00022447892141076647,
+      "signal_to_error_db": 18.759365904737113,
+      "frequency_hz": 7.300001934331746,
+      "frequency_error_hz": 1.9343317463338394e-06,
+      "amplitude_px": 0.27883807348952433,
+      "amplitude_abs_error_px": 0.02883807348952433,
+      "quality_median": 0.994370378264247,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 117.17705819324864,
+      "elapsed_inference_s": 1.5361368750454858,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.001871096740193602,
+      "displacement_bias_px": 0.006179325197322469,
+      "signal_to_error_db": 39.51012661305454,
+      "frequency_hz": 7.299953527305818,
+      "frequency_error_hz": 4.647269418178723e-05,
+      "amplitude_px": 0.2517302812383195,
+      "amplitude_abs_error_px": 0.0017302812383194754,
+      "quality_median": 0.9885003594723094,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 124.42831384982628,
+      "elapsed_inference_s": 1.4466160830343142,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.00016476018058546156,
+      "displacement_bias_px": -7.92456266888649e-06,
+      "signal_to_error_db": 60.61500627014621,
+      "frequency_hz": 7.299999693356365,
+      "frequency_error_hz": 3.06643634928605e-07,
+      "amplitude_px": 0.2500415906246991,
+      "amplitude_abs_error_px": 4.1590624699106016e-05,
+      "quality_median": 0.9885003594723094,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 209.81454144256512,
+      "elapsed_inference_s": 0.8579004999483004,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.002520704230986044,
+      "displacement_bias_px": -0.0018233168792208937,
+      "signal_to_error_db": 36.92161364907815,
+      "frequency_hz": 7.299804097971317,
+      "frequency_error_hz": 0.00019590202868258189,
+      "amplitude_px": 0.25049621817592743,
+      "amplitude_abs_error_px": 0.000496218175927432,
+      "quality_median": 0.9533284531911399,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 63.222828463538505,
+      "elapsed_inference_s": 2.847072875010781,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.019158947760645913,
+      "displacement_bias_px": -0.001291060982327475,
+      "signal_to_error_db": 19.304618390695722,
+      "frequency_hz": 7.299586704108891,
+      "frequency_error_hz": 0.0004132958911089446,
+      "amplitude_px": 0.2765229696766857,
+      "amplitude_abs_error_px": 0.026522969676685715,
+      "quality_median": 0.9696252740332574,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 179.54936109480906,
+      "elapsed_inference_s": 1.0025098329642788,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.007160608421342289,
+      "displacement_bias_px": -0.0027956733276038354,
+      "signal_to_error_db": 27.853052957325062,
+      "frequency_hz": 7.300118665422759,
+      "frequency_error_hz": 0.0001186654227591788,
+      "amplitude_px": 0.2591807289613732,
+      "amplitude_abs_error_px": 0.009180728961373175,
+      "quality_median": 0.863717933539599,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 85.36404079631772,
+      "elapsed_inference_s": 2.1086162079591304,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.0030062789759113806,
+      "displacement_bias_px": -0.002726292496635016,
+      "signal_to_error_db": 35.391465862616506,
+      "frequency_hz": 7.299741479175887,
+      "frequency_error_hz": 0.00025852082411326194,
+      "amplitude_px": 0.250290319203263,
+      "amplitude_abs_error_px": 0.00029031920326300087,
+      "quality_median": 0.863717933539599,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 203.73024418300042,
+      "elapsed_inference_s": 0.8835212499834597,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.0026559632771244695,
+      "displacement_bias_px": -0.0026331942658216045,
+      "signal_to_error_db": 36.46761013736676,
+      "frequency_hz": 7.299895698671092,
+      "frequency_error_hz": 0.00010430132890792976,
+      "amplitude_px": 0.25000841451455624,
+      "amplitude_abs_error_px": 8.414514556243091e-06,
+      "quality_median": 0.9532857272369823,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 32.802907284857255,
+      "elapsed_inference_s": 5.487318500061519,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.02083601809412141,
+      "displacement_bias_px": -0.0027492061671577023,
+      "signal_to_error_db": 18.575756937917397,
+      "frequency_hz": 7.300094034443236,
+      "frequency_error_hz": 9.403444323652366e-05,
+      "amplitude_px": 0.2790552915902337,
+      "amplitude_abs_error_px": 0.02905529159023368,
+      "quality_median": 0.9702768041594241,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 52.77139549372335,
+      "elapsed_inference_s": 3.410938792047091,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.0029358012292915923,
+      "displacement_bias_px": 0.0006979196790848503,
+      "signal_to_error_db": 35.59751849614554,
+      "frequency_hz": 7.299874985557289,
+      "frequency_error_hz": 0.0001250144427107358,
+      "amplitude_px": 0.250405844713389,
+      "amplitude_abs_error_px": 0.0004058447133890031,
+      "quality_median": 0.8636361497670413,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 106.74267535725102,
+      "elapsed_inference_s": 1.686298375017941,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.0032840542586950387,
+      "displacement_bias_px": -0.0032479421433603693,
+      "signal_to_error_db": 34.62384497879831,
+      "frequency_hz": 7.299809752826448,
+      "frequency_error_hz": 0.0001902471735517608,
+      "amplitude_px": 0.2500174518437327,
+      "amplitude_abs_error_px": 1.745184373269648e-05,
+      "quality_median": 0.8636361497670413,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 146.48536337785376,
+      "elapsed_inference_s": 1.2287917089415714,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.009973448524263413,
+      "displacement_bias_px": -0.00784445824682393,
+      "signal_to_error_db": 24.975144446042425,
+      "frequency_hz": 7.299199085276792,
+      "frequency_error_hz": 0.0008009147232082015,
+      "amplitude_px": 0.251256851161731,
+      "amplitude_abs_error_px": 0.0012568511617310207,
+      "quality_median": 0.8152890933787491,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 30.425630267693744,
+      "elapsed_inference_s": 5.916064791963436,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.025145023585759773,
+      "displacement_bias_px": -0.00520461336888813,
+      "signal_to_error_db": 16.943010509598682,
+      "frequency_hz": 7.298487202540704,
+      "frequency_error_hz": 0.0015127974592958893,
+      "amplitude_px": 0.27804182146534256,
+      "amplitude_abs_error_px": 0.028041821465342565,
+      "quality_median": 0.8807000492342157,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 195.2078109191333,
+      "elapsed_inference_s": 0.9220942499814555,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.011194072953307226,
+      "displacement_bias_px": -0.008722101805568993,
+      "signal_to_error_db": 23.97228879728025,
+      "frequency_hz": 7.299663262696744,
+      "frequency_error_hz": 0.0003367373032556742,
+      "amplitude_px": 0.25496470482255457,
+      "amplitude_abs_error_px": 0.0049647048225545665,
+      "quality_median": 0.5612628689723194,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 166.64084118764416,
+      "elapsed_inference_s": 1.0801673750393093,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.011818944193582369,
+      "displacement_bias_px": -0.01062136009338813,
+      "signal_to_error_db": 23.500477815769017,
+      "frequency_hz": 7.2990393991909395,
+      "frequency_error_hz": 0.0009606008090603524,
+      "amplitude_px": 0.249332923114166,
+      "amplitude_abs_error_px": 0.0006670768858340059,
+      "quality_median": 0.5612628689723194,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 156.26712564071715,
+      "elapsed_inference_s": 1.1518737499136478,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.01070261410944259,
+      "displacement_bias_px": -0.010691886779507543,
+      "signal_to_error_db": 24.36225411792027,
+      "frequency_hz": 7.299667070756607,
+      "frequency_error_hz": 0.0003329292433926767,
+      "amplitude_px": 0.24934335948405736,
+      "amplitude_abs_error_px": 0.0006566405159426358,
+      "quality_median": 0.815161588707471,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 81.41386634893487,
+      "elapsed_inference_s": 2.2109255839604884,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.02520974782786657,
+      "displacement_bias_px": -0.01214045865746613,
+      "signal_to_error_db": 16.920681426666786,
+      "frequency_hz": 7.30060969688148,
+      "frequency_error_hz": 0.0006096968814803816,
+      "amplitude_px": 0.2796879389298154,
+      "amplitude_abs_error_px": 0.029687938929815416,
+      "quality_median": 0.8834506073518098,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 249.61128244613596,
+      "elapsed_inference_s": 0.7211212499532849,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.01147632470081158,
+      "displacement_bias_px": -0.007059894568424631,
+      "signal_to_error_db": 23.755994910304942,
+      "frequency_hz": 7.2999842277588725,
+      "frequency_error_hz": 1.5772241127365305e-05,
+      "amplitude_px": 0.24532493867910815,
+      "amplitude_abs_error_px": 0.004675061320891849,
+      "quality_median": 0.5619575710930281,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 105.37781530544514,
+      "elapsed_inference_s": 1.708139416994527,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82102,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.013016931837896486,
+      "displacement_bias_px": -0.012949514022411145,
+      "signal_to_error_db": 22.66187884186899,
+      "frequency_hz": 7.29937268996805,
+      "frequency_error_hz": 0.0006273100319500458,
+      "amplitude_px": 0.24824583070193254,
+      "amplitude_abs_error_px": 0.0017541692980674595,
+      "quality_median": 0.5619575710930281,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 173.9841920844,
+      "elapsed_inference_s": 1.0345767500111833,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 4.0661466784220125e-05,
+      "displacement_bias_px": 2.9985906422569704e-05,
+      "signal_to_error_db": 72.76839063755469,
+      "frequency_hz": 7.300000423851034,
+      "frequency_error_hz": 4.238510342702284e-07,
+      "amplitude_px": 0.24995137119293498,
+      "amplitude_abs_error_px": 4.862880706502093e-05,
+      "quality_median": 0.9983429815431286,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 61.675790327596815,
+      "elapsed_inference_s": 2.9184871250763535,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.019918238467299367,
+      "displacement_bias_px": 6.129178084290785e-05,
+      "signal_to_error_db": 18.967032904538584,
+      "frequency_hz": 7.2999995931929815,
+      "frequency_error_hz": 4.0680701829387544e-07,
+      "amplitude_px": 0.27815704644480044,
+      "amplitude_abs_error_px": 0.028157046444800438,
+      "quality_median": 0.9946690783255723,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 168.23029325563334,
+      "elapsed_inference_s": 1.0699618749786168,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.009014465698750761,
+      "displacement_bias_px": 0.0006047358857171043,
+      "signal_to_error_db": 25.853251645627402,
+      "frequency_hz": 7.300158859392737,
+      "frequency_error_hz": 0.00015885939273729832,
+      "amplitude_px": 0.26149820747291286,
+      "amplitude_abs_error_px": 0.011498207472912858,
+      "quality_median": 0.9882559505224694,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 236.47105076267528,
+      "elapsed_inference_s": 0.7611925409873948,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.0001642511940210444,
+      "displacement_bias_px": 9.762696831990038e-06,
+      "signal_to_error_db": 60.641880749230424,
+      "frequency_hz": 7.299999970882041,
+      "frequency_error_hz": 2.9117958710855874e-08,
+      "amplitude_px": 0.24992248503103465,
+      "amplitude_abs_error_px": 7.751496896535315e-05,
+      "quality_median": 0.9882559505224694,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 140.057398241513,
+      "elapsed_inference_s": 1.2851873750332743,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 7.387920109656108e-05,
+      "displacement_bias_px": 4.858842145285094e-05,
+      "signal_to_error_db": 67.58160764626524,
+      "frequency_hz": 7.300000598760837,
+      "frequency_error_hz": 5.987608373558828e-07,
+      "amplitude_px": 0.2500917764166615,
+      "amplitude_abs_error_px": 9.177641666152647e-05,
+      "quality_median": 0.9983836781119289,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 65.72936391671793,
+      "elapsed_inference_s": 2.7385020829970017,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.019942469166527997,
+      "displacement_bias_px": 5.14141421559811e-05,
+      "signal_to_error_db": 18.956472870973183,
+      "frequency_hz": 7.299999388027786,
+      "frequency_error_hz": 6.119722142372552e-07,
+      "amplitude_px": 0.27819131346271814,
+      "amplitude_abs_error_px": 0.028191313462718137,
+      "quality_median": 0.9944843665623004,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 250.17387674884822,
+      "elapsed_inference_s": 0.7194995830068365,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.0029342209676747307,
+      "displacement_bias_px": 0.009239760260913115,
+      "signal_to_error_db": 35.60219513206764,
+      "frequency_hz": 7.299926871168707,
+      "frequency_error_hz": 7.312883129273473e-05,
+      "amplitude_px": 0.2528154428142919,
+      "amplitude_abs_error_px": 0.002815442814291913,
+      "quality_median": 0.9885953398332397,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 165.12305915636884,
+      "elapsed_inference_s": 1.0900960830040276,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.0,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.00016445607722429917,
+      "displacement_bias_px": 9.935905731377765e-06,
+      "signal_to_error_db": 60.63105291986187,
+      "frequency_hz": 7.299999822449537,
+      "frequency_error_hz": 1.7755046322065482e-07,
+      "amplitude_px": 0.25007777362598715,
+      "amplitude_abs_error_px": 7.77736259871542e-05,
+      "quality_median": 0.9885953398332397,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 169.19139788141914,
+      "elapsed_inference_s": 1.0638838750310242,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.0027721969148789944,
+      "displacement_bias_px": -0.002281836835580133,
+      "signal_to_error_db": 36.09556993860184,
+      "frequency_hz": 7.299922323158445,
+      "frequency_error_hz": 7.767684155446375e-05,
+      "amplitude_px": 0.24986727822104313,
+      "amplitude_abs_error_px": 0.00013272177895687354,
+      "quality_median": 0.9562518687529735,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 76.48638811894587,
+      "elapsed_inference_s": 2.3533599170623347,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.020446783753705088,
+      "displacement_bias_px": -0.007036117494942543,
+      "signal_to_error_db": 18.73955137821024,
+      "frequency_hz": 7.299471748157937,
+      "frequency_error_hz": 0.0005282518420628435,
+      "amplitude_px": 0.2784163746753435,
+      "amplitude_abs_error_px": 0.028416374675343525,
+      "quality_median": 0.9730774845463088,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 238.7613588998769,
+      "elapsed_inference_s": 0.753890834050253,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.007709984107439273,
+      "displacement_bias_px": -0.0016930230417742005,
+      "signal_to_error_db": 27.210981799165292,
+      "frequency_hz": 7.300127345607643,
+      "frequency_error_hz": 0.0001273456076429369,
+      "amplitude_px": 0.25988411753294266,
+      "amplitude_abs_error_px": 0.00988411753294266,
+      "quality_median": 0.8674879860788125,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 212.17481682226895,
+      "elapsed_inference_s": 0.8483570420648903,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.0034486561183283454,
+      "displacement_bias_px": -0.003569813566371956,
+      "signal_to_error_db": 34.199053636267195,
+      "frequency_hz": 7.299855495088465,
+      "frequency_error_hz": 0.0001445049115345043,
+      "amplitude_px": 0.2496091697809216,
+      "amplitude_abs_error_px": 0.000390830219078403,
+      "quality_median": 0.8674879860788125,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 175.09659496111695,
+      "elapsed_inference_s": 1.0280039999634027,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.002565827682635461,
+      "displacement_bias_px": 0.00030101581022869644,
+      "signal_to_error_db": 36.767501727731336,
+      "frequency_hz": 7.300422854497642,
+      "frequency_error_hz": 0.0004228544976419002,
+      "amplitude_px": 0.250064506404652,
+      "amplitude_abs_error_px": 6.45064046519983e-05,
+      "quality_median": 0.9562650546396292,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 27.076242129952632,
+      "elapsed_inference_s": 6.6478944580303505,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.02047279109112371,
+      "displacement_bias_px": -0.0015423583039622796,
+      "signal_to_error_db": 18.7285103596331,
+      "frequency_hz": 7.300771348818095,
+      "frequency_error_hz": 0.0007713488180955963,
+      "amplitude_px": 0.2783713546374373,
+      "amplitude_abs_error_px": 0.028371354637437285,
+      "quality_median": 0.9699539319010873,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 121.82867208780357,
+      "elapsed_inference_s": 1.4774847079534084,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.003215425151281163,
+      "displacement_bias_px": 0.003328357450616901,
+      "signal_to_error_db": 34.807283365562746,
+      "frequency_hz": 7.300205363057751,
+      "frequency_error_hz": 0.00020536305775120667,
+      "amplitude_px": 0.25126519641951894,
+      "amplitude_abs_error_px": 0.0012651964195189436,
+      "quality_median": 0.8675407992478761,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 165.18413265471168,
+      "elapsed_inference_s": 1.0896930419839919,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.01,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.0032474695375944757,
+      "displacement_bias_px": -0.0004548305685502819,
+      "signal_to_error_db": 34.72114973742568,
+      "frequency_hz": 7.3004329688263025,
+      "frequency_error_hz": 0.0004329688263027265,
+      "amplitude_px": 0.24999942186476662,
+      "amplitude_abs_error_px": 5.781352333811274e-07,
+      "quality_median": 0.8675407992478761,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 139.9763744153465,
+      "elapsed_inference_s": 1.2859312919899821,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.011035219393363141,
+      "displacement_bias_px": -0.009303160758495459,
+      "signal_to_error_db": 24.096432018464654,
+      "frequency_hz": 7.2995830698469675,
+      "frequency_error_hz": 0.0004169301530323466,
+      "amplitude_px": 0.24888294306794875,
+      "amplitude_abs_error_px": 0.001117056932051247,
+      "quality_median": 0.8274289655252292,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 58.19482639828748,
+      "elapsed_inference_s": 3.093058457947336,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.02546875352658274,
+      "displacement_bias_px": -0.027786375237484725,
+      "signal_to_error_db": 16.831897644900955,
+      "frequency_hz": 7.297771657761947,
+      "frequency_error_hz": 0.002228342238052683,
+      "amplitude_px": 0.27901713001650463,
+      "amplitude_abs_error_px": 0.029017130016504633,
+      "quality_median": 0.8946044115823402,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 116.6200402508528,
+      "elapsed_inference_s": 1.5434739999473095,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.01175925978849316,
+      "displacement_bias_px": -0.014526672391675025,
+      "signal_to_error_db": 23.54445175571699,
+      "frequency_hz": 7.299508568883427,
+      "frequency_error_hz": 0.0004914311165729046,
+      "amplitude_px": 0.25258106318490936,
+      "amplitude_abs_error_px": 0.00258106318490936,
+      "quality_median": 0.5736189139517593,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 139.39552417842933,
+      "elapsed_inference_s": 1.2912896670168266,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "x",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.013815358872050995,
+      "displacement_bias_px": -0.01388366823709413,
+      "signal_to_error_db": 22.144808040664937,
+      "frequency_hz": 7.299306648335725,
+      "frequency_error_hz": 0.000693351664274644,
+      "amplitude_px": 0.24712819934154842,
+      "amplitude_abs_error_px": 0.0028718006584515787,
+      "quality_median": 0.5736189139517593,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 458.69119472439144,
+      "elapsed_inference_s": 0.3924208750249818,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.010239334995812255,
+      "displacement_bias_px": 0.0007830903877807955,
+      "signal_to_error_db": 24.746616418972287,
+      "frequency_hz": 7.301788044303798,
+      "frequency_error_hz": 0.0017880443037983085,
+      "amplitude_px": 0.24936034302105786,
+      "amplitude_abs_error_px": 0.000639656978942138,
+      "quality_median": 0.827354623591713,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 56.889192297608375,
+      "elapsed_inference_s": 3.1640456250170246,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.025978926168246434,
+      "displacement_bias_px": -0.0057474801987050595,
+      "signal_to_error_db": 16.659627542706087,
+      "frequency_hz": 7.303184728156484,
+      "frequency_error_hz": 0.0031847281564845176,
+      "amplitude_px": 0.27880438688320874,
+      "amplitude_abs_error_px": 0.028804386883208744,
+      "quality_median": 0.8828865461933064,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 143.91746332621284,
+      "elapsed_inference_s": 1.2507168750744313,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.011818202757710887,
+      "displacement_bias_px": -0.0036099572702122614,
+      "signal_to_error_db": 23.50102272333919,
+      "frequency_hz": 7.301355807294798,
+      "frequency_error_hz": 0.001355807294798339,
+      "amplitude_px": 0.2452986866529774,
+      "amplitude_abs_error_px": 0.00470131334702259,
+      "quality_median": 0.5740833191348484,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 108.3858509196383,
+      "elapsed_inference_s": 1.660733374999836,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 82103,
+      "noise_std": 0.04,
+      "axis": "y",
+      "family": "raster",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.01288226535237395,
+      "displacement_bias_px": -0.0017120594280787033,
+      "signal_to_error_db": 22.75220664347537,
+      "frequency_hz": 7.301813319544066,
+      "frequency_error_hz": 0.001813319544066161,
+      "amplitude_px": 0.2479921413342885,
+      "amplitude_abs_error_px": 0.002007858665711487,
+      "quality_median": 0.5740833191348484,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 315.6734039416926,
+      "elapsed_inference_s": 0.5702095829183236,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.004297952598162162,
+      "displacement_bias_px": -0.0015253104474834862,
+      "signal_to_error_db": 32.286819028483265,
+      "frequency_hz": 7.299787284834477,
+      "frequency_error_hz": 0.0002127151655226811,
+      "amplitude_px": 0.2511350291083602,
+      "amplitude_abs_error_px": 0.0011350291083602193,
+      "quality_median": 0.9425149456445704,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 28.112613793024863,
+      "elapsed_inference_s": 6.402819792041555,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.015959733023300112,
+      "displacement_bias_px": -0.0002526274316227939,
+      "signal_to_error_db": 20.89153901330826,
+      "frequency_hz": 7.299795745967871,
+      "frequency_error_hz": 0.00020425403212875892,
+      "amplitude_px": 0.2719349764132091,
+      "amplitude_abs_error_px": 0.021934976413209073,
+      "quality_median": 0.9773395183166055,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 17.33747365472411,
+      "elapsed_inference_s": 10.382135458989069,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.014645858779593793,
+      "displacement_bias_px": 0.005318291542581384,
+      "signal_to_error_db": 21.637754611925857,
+      "frequency_hz": 7.299859234480426,
+      "frequency_error_hz": 0.0001407655195739821,
+      "amplitude_px": 0.2694617334782506,
+      "amplitude_abs_error_px": 0.019461733478250587,
+      "quality_median": 0.853492867967905,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 7.4129151576116685,
+      "elapsed_inference_s": 24.28194524999708,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83101,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.004376377787167556,
+      "displacement_bias_px": -0.0014328839077706748,
+      "signal_to_error_db": 32.129755354950596,
+      "frequency_hz": 7.299772880929803,
+      "frequency_error_hz": 0.00022711907019701272,
+      "amplitude_px": 0.25126308875855347,
+      "amplitude_abs_error_px": 0.0012630887585534656,
+      "quality_median": 0.853492867967905,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 354.0953132949847,
+      "elapsed_inference_s": 0.5083377080736682,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.004814662148132153,
+      "displacement_bias_px": 0.0016359981850946738,
+      "signal_to_error_db": 31.300735106966144,
+      "frequency_hz": 7.299901109700458,
+      "frequency_error_hz": 9.889029954202044e-05,
+      "amplitude_px": 0.24964620390584524,
+      "amplitude_abs_error_px": 0.0003537960941547569,
+      "quality_median": 0.93716207524034,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 2.701675754898051,
+      "elapsed_inference_s": 66.62531566701364,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.015134690203668456,
+      "displacement_bias_px": 0.0022339801830226756,
+      "signal_to_error_db": 21.352580742316306,
+      "frequency_hz": 7.3000860186341905,
+      "frequency_error_hz": 8.601863419066547e-05,
+      "amplitude_px": 0.2706389211116892,
+      "amplitude_abs_error_px": 0.02063892111168919,
+      "quality_median": 0.9743290669727775,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 8.381662331242575,
+      "elapsed_inference_s": 21.475453542079777,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.015533309257527217,
+      "displacement_bias_px": 0.01044338165194223,
+      "signal_to_error_db": 21.126771679263243,
+      "frequency_hz": 7.299955273707879,
+      "frequency_error_hz": 4.472629212060042e-05,
+      "amplitude_px": 0.2706362653649228,
+      "amplitude_abs_error_px": 0.0206362653649228,
+      "quality_median": 0.8427266805776639,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 8.648840273724218,
+      "elapsed_inference_s": 20.812038874952123,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83102,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.0050533308389066065,
+      "displacement_bias_px": 0.0016833759309890935,
+      "signal_to_error_db": 30.88049681201484,
+      "frequency_hz": 7.299990717011753,
+      "frequency_error_hz": 9.282988246539503e-06,
+      "amplitude_px": 0.24983185323005794,
+      "amplitude_abs_error_px": 0.00016814676994206246,
+      "quality_median": 0.8427266805776639,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 318.4160096525029,
+      "elapsed_inference_s": 0.5652982090832666,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "classical",
+      "displacement_rmse_px": 0.008718575622180211,
+      "displacement_bias_px": 0.002364802981540147,
+      "signal_to_error_db": 26.14314067927717,
+      "frequency_hz": 7.300609088715944,
+      "frequency_error_hz": 0.0006090887159437841,
+      "amplitude_px": 0.25131534661932453,
+      "amplitude_abs_error_px": 0.0013153466193245311,
+      "quality_median": 0.9337238291451015,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 8.330809776007126,
+      "elapsed_inference_s": 21.60654304199852,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "phase",
+      "displacement_rmse_px": 0.01584021287273262,
+      "displacement_bias_px": -0.0021070823954389977,
+      "signal_to_error_db": 20.956831182619197,
+      "frequency_hz": 7.300153404894655,
+      "frequency_error_hz": 0.0001534048946547628,
+      "amplitude_px": 0.26925779875191685,
+      "amplitude_abs_error_px": 0.019257798751916855,
+      "quality_median": 0.9486461474711272,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 104.98370527538486,
+      "elapsed_inference_s": 1.714551791897975,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "learned",
+      "displacement_rmse_px": 0.0198890726574913,
+      "displacement_bias_px": 0.010655914790611832,
+      "signal_to_error_db": 18.97976077001706,
+      "frequency_hz": 7.300683920830671,
+      "frequency_error_hz": 0.0006839208306708144,
+      "amplitude_px": 0.27384491327775545,
+      "amplitude_abs_error_px": 0.023844913277755453,
+      "quality_median": 0.8263734585833538,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 130.07143869380937,
+      "elapsed_inference_s": 1.383854917017743,
+      "tracking_status": "valid"
+    },
+    {
+      "seed": 83103,
+      "noise_std": 0.01,
+      "axis": "x",
+      "family": "analytic",
+      "frames": 180,
+      "method": "without_learned_calibration",
+      "displacement_rmse_px": 0.008999048809619188,
+      "displacement_bias_px": 0.0024611676252988394,
+      "signal_to_error_db": 25.86811930848046,
+      "frequency_hz": 7.300663983879913,
+      "frequency_error_hz": 0.0006639838799129549,
+      "amplitude_px": 0.2509022681935736,
+      "amplitude_abs_error_px": 0.0009022681935735855,
+      "quality_median": 0.8263734585833538,
+      "rejected_frame_fraction": 0.0,
+      "inference_fps": 302.3231432293434,
+      "elapsed_inference_s": 0.595389417023398,
+      "tracking_status": "valid"
+    }
+  ],
+  "summary": [
+    {
+      "method": "classical",
+      "sequences": 21,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 6,
+      "displacement_rmse_px": {
+        "mean": 0.004595634814375094,
+        "texture_cluster_bootstrap_95pct": [
+          0.004346640650152226,
+          0.005570998277653983
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.0003368920985585145,
+        "texture_cluster_bootstrap_95pct": [
+          0.00024019204243685977,
+          0.0004304894954621153
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.0003872428803557757,
+        "texture_cluster_bootstrap_95pct": [
+          0.00023406341579819165,
+          0.0007079648293003143
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 42.21757642536103,
+        "texture_cluster_bootstrap_95pct": [
+          36.733917687351905,
+          44.115675221492346
+        ]
+      },
+      "inference_fps": {
+        "mean": 50.58096228452852,
+        "texture_cluster_bootstrap_95pct": [
+          34.097158635039115,
+          56.73978890059354
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "phase",
+      "sequences": 21,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 6,
+      "displacement_rmse_px": {
+        "mean": 0.021019192271470827,
+        "texture_cluster_bootstrap_95pct": [
+          0.018831786923433593,
+          0.021865495508151266
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.0005990844074131916,
+        "texture_cluster_bootstrap_95pct": [
+          0.0003029804090208608,
+          0.000897686016938344
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.027380934947159704,
+        "texture_cluster_bootstrap_95pct": [
+          0.02453124219210467,
+          0.028471164881138503
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 18.60483338481452,
+        "texture_cluster_bootstrap_95pct": [
+          18.221539729472898,
+          19.60164155082285
+        ]
+      },
+      "inference_fps": {
+        "mean": 153.5144351746562,
+        "texture_cluster_bootstrap_95pct": [
+          95.28650901557612,
+          178.40053788136157
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "learned",
+      "sequences": 21,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 6,
+      "displacement_rmse_px": {
+        "mean": 0.008753548307130482,
+        "texture_cluster_bootstrap_95pct": [
+          0.007537778919363758,
+          0.012390722225540446
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.0003231204302910721,
+        "texture_cluster_bootstrap_95pct": [
+          0.0001566309190624282,
+          0.0004483890168386697
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.007548498348572559,
+        "texture_cluster_bootstrap_95pct": [
+          0.00565238906649254,
+          0.013125279949821643
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 27.761363859456292,
+        "texture_cluster_bootstrap_95pct": [
+          24.609037434947524,
+          28.952781697212114
+        ]
+      },
+      "inference_fps": {
+        "mean": 152.66120645210134,
+        "texture_cluster_bootstrap_95pct": [
+          77.30079907630004,
+          196.86926252783485
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "without_learned_calibration",
+      "sequences": 21,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 6,
+      "displacement_rmse_px": {
+        "mean": 0.005490616937938113,
+        "texture_cluster_bootstrap_95pct": [
+          0.005125697397597639,
+          0.006194137372897496
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.00041853970046186397,
+        "texture_cluster_bootstrap_95pct": [
+          0.00029790812241864417,
+          0.0004966009977758312
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.0006071960914900301,
+        "texture_cluster_bootstrap_95pct": [
+          0.00039983314103462733,
+          0.0009030815642173309
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 38.05152957666552,
+        "texture_cluster_bootstrap_95pct": [
+          34.15497834721202,
+          39.30761301430768
+        ]
+      },
+      "inference_fps": {
+        "mean": 232.1694385481101,
+        "texture_cluster_bootstrap_95pct": [
+          207.87755037403383,
+          279.9415925702197
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "raster_summary": [
+    {
+      "method": "classical",
+      "sequences": 18,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.004370952262966802,
+        "texture_cluster_bootstrap_95pct": [
+          0.004322896939578821,
+          0.004454519942428439
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.00034189110492890664,
+        "texture_cluster_bootstrap_95pct": [
+          0.00023911018311310409,
+          0.0004510880679831075
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.0002959960369795434,
+        "texture_cluster_bootstrap_95pct": [
+          0.00011744577972315022,
+          0.000421484444827346
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 44.26880056210306,
+        "texture_cluster_bootstrap_95pct": [
+          43.676019731265015,
+          44.59540083284758
+        ]
+      },
+      "inference_fps": {
+        "mean": 56.83639492506494,
+        "texture_cluster_bootstrap_95pct": [
+          53.228501338673354,
+          59.6053829050033
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "phase",
+      "sequences": 18,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.0219149112000659,
+        "texture_cluster_bootstrap_95pct": [
+          0.021520099471849963,
+          0.022186640432766847
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.0006742830552612686,
+        "texture_cluster_bootstrap_95pct": [
+          0.00043885771440329197,
+          0.0011189483056546952
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.028509329867418817,
+        "texture_cluster_bootstrap_95pct": [
+          0.028019207995455035,
+          0.029015847253465954
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 18.194475007936727,
+        "texture_cluster_bootstrap_95pct": [
+          18.074078512785988,
+          18.362164394197166
+        ]
+      },
+      "inference_fps": {
+        "mean": 171.83890541146826,
+        "texture_cluster_bootstrap_95pct": [
+          148.6216036540032,
+          193.6398284855303
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "learned",
+      "sequences": 18,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.007430904097507102,
+        "texture_cluster_bootstrap_95pct": [
+          0.007105807801957702,
+          0.007741926411891664
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.00032867313298595095,
+        "texture_cluster_bootstrap_95pct": [
+          0.00013266298087607117,
+          0.000451367201282545
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.005254197399949716,
+        "texture_cluster_bootstrap_95pct": [
+          0.005150473597690626,
+          0.005457556795266387
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 28.958019665965335,
+        "texture_cluster_bootstrap_95pct": [
+          28.41986440357988,
+          29.597092245578008
+        ]
+      },
+      "inference_fps": {
+        "mean": 169.9862300760546,
+        "texture_cluster_bootstrap_95pct": [
+          114.27881469641618,
+          224.55746978273228
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "without_learned_calibration",
+      "sequences": 18,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.005381899903389279,
+        "texture_cluster_bootstrap_95pct": [
+          0.005240514177078863,
+          0.005620409525265518
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.000438274876185702,
+        "texture_cluster_bootstrap_95pct": [
+          0.00033955809283714444,
+          0.0005140586024333279
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.0005787563444011955,
+        "texture_cluster_bootstrap_95pct": [
+          0.00036111271707921683,
+          0.0009043927122378929
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 39.45576386858501,
+        "texture_cluster_bootstrap_95pct": [
+          39.18169195448758,
+          39.6835415378381
+        ]
+      },
+      "inference_fps": {
+        "mean": 216.7068746296378,
+        "texture_cluster_bootstrap_95pct": [
+          186.9663033475906,
+          233.1143940275799
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "analytic_summary": [
+    {
+      "method": "classical",
+      "sequences": 3,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.005943730122824842,
+        "texture_cluster_bootstrap_95pct": [
+          0.004297952598162162,
+          0.008718575622180211
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.0003068980603361619,
+        "texture_cluster_bootstrap_95pct": [
+          9.889029954202044e-05,
+          0.0006090887159437841
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.0009347239406131691,
+        "texture_cluster_bootstrap_95pct": [
+          0.0003537960941547569,
+          0.0013153466193245311
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 29.91023160490886,
+        "texture_cluster_bootstrap_95pct": [
+          26.14314067927717,
+          32.286819028483265
+        ]
+      },
+      "inference_fps": {
+        "mean": 13.048366441310014,
+        "texture_cluster_bootstrap_95pct": [
+          2.701675754898051,
+          28.112613793024863
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "phase",
+      "sequences": 3,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.0156448786999004,
+        "texture_cluster_bootstrap_95pct": [
+          0.015134690203668456,
+          0.015959733023300112
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.00014789252032472908,
+        "texture_cluster_bootstrap_95pct": [
+          8.601863419066547e-05,
+          0.00020425403212875892
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.020610565425605038,
+        "texture_cluster_bootstrap_95pct": [
+          0.019257798751916855,
+          0.021934976413209073
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 21.066983646081255,
+        "texture_cluster_bootstrap_95pct": [
+          20.89153901330826,
+          21.352580742316306
+        ]
+      },
+      "inference_fps": {
+        "mean": 43.56761375378385,
+        "texture_cluster_bootstrap_95pct": [
+          8.381662331242575,
+          104.98370527538486
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "learned",
+      "sequences": 3,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.016689413564870772,
+        "texture_cluster_bootstrap_95pct": [
+          0.014645858779593795,
+          0.0198890726574913
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.00028980421412179896,
+        "texture_cluster_bootstrap_95pct": [
+          4.472629212060042e-05,
+          0.0006839208306708144
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.021314304040309612,
+        "texture_cluster_bootstrap_95pct": [
+          0.019461733478250587,
+          0.023844913277755453
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 20.58142902040205,
+        "texture_cluster_bootstrap_95pct": [
+          18.97976077001706,
+          21.637754611925857
+        ]
+      },
+      "inference_fps": {
+        "mean": 48.71106470838175,
+        "texture_cluster_bootstrap_95pct": [
+          7.4129151576116685,
+          130.07143869380937
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "method": "without_learned_calibration",
+      "sequences": 3,
+      "excluded_unobservable_sequences": 0,
+      "independent_texture_seeds": 3,
+      "displacement_rmse_px": {
+        "mean": 0.006142919145231118,
+        "texture_cluster_bootstrap_95pct": [
+          0.004376377787167556,
+          0.008999048809619188
+        ]
+      },
+      "frequency_error_hz": {
+        "mean": 0.0003001286461188357,
+        "texture_cluster_bootstrap_95pct": [
+          9.282988246539503e-06,
+          0.0006639838799129549
+        ]
+      },
+      "amplitude_abs_error_px": {
+        "mean": 0.0007778345740230378,
+        "texture_cluster_bootstrap_95pct": [
+          0.00016814676994206246,
+          0.0012630887585534656
+        ]
+      },
+      "signal_to_error_db": {
+        "mean": 29.626123825148635,
+        "texture_cluster_bootstrap_95pct": [
+          25.86811930848046,
+          32.129755354950596
+        ]
+      },
+      "inference_fps": {
+        "mean": 324.94482205894366,
+        "texture_cluster_bootstrap_95pct": [
+          302.3231432293434,
+          354.0953132949847
+        ]
+      },
+      "rejected_frame_fraction": {
+        "mean": 0.0,
+        "texture_cluster_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "failure_cases": {
+    "out_of_band_tone_reports_hz": {
+      "1.0": null,
+      "2.0": null,
+      "3.0": null,
+      "15.0": null,
+      "20.0": null
+    },
+    "white_noise_screen": {
+      "seeds": [
+        840000,
+        840019
+      ],
+      "records": 20,
+      "resolved_seeds": [],
+      "scope": "Small deterministic abstention check, not a false-alarm guarantee."
+    },
+    "aliasing": {
+      "true_hz": 52,
+      "sampled_fps": 60,
+      "reported_hz": 8.000000003882834,
+      "recoverable": false,
+      "explanation": "52Hz and 8Hz are indistinguishable at these sample times. Correct acquisition is mandatory."
+    },
+    "flat_texture": {
+      "classical": 0.0,
+      "phase": 0.0,
+      "learned": 0.0
+    },
+    "free_ringdown": {
+      "true_damping_ratio": 0.012,
+      "estimate": {
+        "ratio": 0.012206252948363009,
+        "decay_per_s": 0.6135989060013154,
+        "envelope_r2": 0.9981696286169393,
+        "peaks": 24,
+        "natural_frequency_hz": 8.000596037048822,
+        "sdof_resonance_hz_model": 7.99940391854035,
+        "resonance_assumptions": "Conditional force-to-displacement SDOF model; excitation and resonance are not experimentally verified.",
+        "assumptions": "User-declared free ringdown; isolated linear mode; no forcing."
+      },
+      "warning": null
+    }
+  },
+  "anomaly": {
+    "scope": "Controlled synthetic displacement-waveform experiment only; no physical fault/diagnostic validation.",
+    "train_records": 200,
+    "calibration_records": 100,
+    "test_records": 500,
+    "seed_splits_disjoint": true,
+    "auroc": 0.98255,
+    "auroc_bootstrap_95pct": [
+      0.9728593331372747,
+      0.9903402130155327
+    ],
+    "sensitivity": 0.84,
+    "sensitivity_wilson_95pct": [
+      0.8008643954521175,
+      0.872667244400561
+    ],
+    "specificity": 0.99,
+    "specificity_wilson_95pct": [
+      0.9455138038212967,
+      0.9982325679358592
+    ],
+    "confusion": {
+      "tp": 336,
+      "fn": 64,
+      "fp": 1,
+      "tn": 99
+    },
+    "threshold": 1.7080080923935728,
+    "by_kind": {
+      "healthy": {
+        "n": 100,
+        "flagged": 1
+      },
+      "frequency_shift": {
+        "n": 100,
+        "flagged": 90
+      },
+      "amplitude_change": {
+        "n": 100,
+        "flagged": 93
+      },
+      "harmonic_change": {
+        "n": 100,
+        "flagged": 100
+      },
+      "broadband_noise": {
+        "n": 100,
+        "flagged": 53
+      }
+    },
+    "limitations": [
+      "Reference distribution authored for this target, not generic machinery.",
+      "Threshold set on independent calibration signals; test untouched.",
+      "Input here is synthetic displacement, not camera image. Image-to-signal errors are tested separately.",
+      "Outside-reference means statistical novelty, not damage or defect identification."
+    ]
+  },
+  "anomaly_image_check": {
+    "scope": "Small end-to-end simulated-image transfer check; reference threshold unchanged from waveform calibration.",
+    "method": "classical",
+    "frames_per_record": 240,
+    "fps": 60.0,
+    "shape": [
+      64,
+      64
+    ],
+    "records": [
+      {
+        "seed": 810000,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.008225044067641019,
+        "quality_median": 0.934378931151407,
+        "elapsed_estimation_s": 4.34985445800703,
+        "status": "within_reference",
+        "score": 1.1013884556935372,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810001,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.005176012378774483,
+        "quality_median": 0.9199387726498256,
+        "elapsed_estimation_s": 2.908113749930635,
+        "status": "within_reference",
+        "score": 0.48626228850879316,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810002,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.007280222184731843,
+        "quality_median": 0.9357461842263133,
+        "elapsed_estimation_s": 2.5503934170119464,
+        "status": "within_reference",
+        "score": 0.986937161662577,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810003,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.007934663535741071,
+        "quality_median": 0.93324588092918,
+        "elapsed_estimation_s": 1.9197550419485196,
+        "status": "within_reference",
+        "score": 0.5723638105747102,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810004,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.01747469960958674,
+        "quality_median": 0.9326443068321661,
+        "elapsed_estimation_s": 1.7320125419646502,
+        "status": "within_reference",
+        "score": 1.1233698394464418,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810005,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.0055747684842463825,
+        "quality_median": 0.9347846299921138,
+        "elapsed_estimation_s": 1.8137499160366133,
+        "status": "within_reference",
+        "score": 0.8476610845338312,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810006,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.007183384466266169,
+        "quality_median": 0.9369199661456449,
+        "elapsed_estimation_s": 1.9109694580547512,
+        "status": "within_reference",
+        "score": 0.8850337701239185,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810007,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.006624977339627414,
+        "quality_median": 0.9372113100572279,
+        "elapsed_estimation_s": 3.1346403330098838,
+        "status": "within_reference",
+        "score": 1.2405035533838744,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810008,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.010070350624026558,
+        "quality_median": 0.9352985778651002,
+        "elapsed_estimation_s": 3.8687798749888316,
+        "status": "within_reference",
+        "score": 0.9955743610023845,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 810009,
+        "kind": "reference_like",
+        "label_changed": false,
+        "rmse_px": 0.013165410853485297,
+        "quality_median": 0.9255761307779584,
+        "elapsed_estimation_s": 2.3099513750057667,
+        "status": "within_reference",
+        "score": 0.6832644374305211,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811000,
+        "kind": "frequency_change",
+        "label_changed": true,
+        "rmse_px": 0.022654724127741912,
+        "quality_median": 0.9359798255390124,
+        "elapsed_estimation_s": 4.170403667027131,
+        "status": "outside_reference",
+        "score": 2.505815933556456,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811001,
+        "kind": "amplitude_change",
+        "label_changed": true,
+        "rmse_px": 0.007282840096050077,
+        "quality_median": 0.9399739129327668,
+        "elapsed_estimation_s": 3.941197708947584,
+        "status": "outside_reference",
+        "score": 5.0266514205711985,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811002,
+        "kind": "frequency_change",
+        "label_changed": true,
+        "rmse_px": 0.013105156122494716,
+        "quality_median": 0.9286377774739665,
+        "elapsed_estimation_s": 2.254376291995868,
+        "status": "outside_reference",
+        "score": 2.5598867883928085,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811003,
+        "kind": "amplitude_change",
+        "label_changed": true,
+        "rmse_px": 0.01177021923305766,
+        "quality_median": 0.9409069288337052,
+        "elapsed_estimation_s": 5.2367484589340165,
+        "status": "outside_reference",
+        "score": 3.456153833690701,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811004,
+        "kind": "frequency_change",
+        "label_changed": true,
+        "rmse_px": 0.013584796264392934,
+        "quality_median": 0.9333700976388445,
+        "elapsed_estimation_s": 4.585097915958613,
+        "status": "outside_reference",
+        "score": 1.8069300516196354,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811005,
+        "kind": "amplitude_change",
+        "label_changed": true,
+        "rmse_px": 0.009260539577072069,
+        "quality_median": 0.9352570747284141,
+        "elapsed_estimation_s": 6.427554249996319,
+        "status": "outside_reference",
+        "score": 4.502399412888517,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811006,
+        "kind": "frequency_change",
+        "label_changed": true,
+        "rmse_px": 0.011920850572464996,
+        "quality_median": 0.9335363886054868,
+        "elapsed_estimation_s": 3.8949651250150055,
+        "status": "outside_reference",
+        "score": 3.3559457173083933,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811007,
+        "kind": "amplitude_change",
+        "label_changed": true,
+        "rmse_px": 0.004311321481196672,
+        "quality_median": 0.9366062568613682,
+        "elapsed_estimation_s": 4.188664457993582,
+        "status": "outside_reference",
+        "score": 3.769724500746917,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811008,
+        "kind": "frequency_change",
+        "label_changed": true,
+        "rmse_px": 0.00957764944754613,
+        "quality_median": 0.9262621115421681,
+        "elapsed_estimation_s": 1.8997250420507044,
+        "status": "outside_reference",
+        "score": 2.515260796966226,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      },
+      {
+        "seed": 811009,
+        "kind": "amplitude_change",
+        "label_changed": true,
+        "rmse_px": 0.009616876996774127,
+        "quality_median": 0.9431573695830079,
+        "elapsed_estimation_s": 1.5249699170235544,
+        "status": "outside_reference",
+        "score": 2.7893475520704096,
+        "threshold": 1.7080080923935728,
+        "reference_scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+        "diagnostic": false,
+        "acquisition_match": "unverified",
+        "explanation": "Distance from reference recordings; outside-reference does not imply damage or identify a fault. Setup match is unverified."
+      }
+    ],
+    "sensitivity": 1.0,
+    "sensitivity_wilson_95pct": [
+      0.7224672001371218,
+      0.9999999999999999
+    ],
+    "specificity": 1.0,
+    "specificity_wilson_95pct": [
+      0.7224672001371218,
+      0.9999999999999999
+    ],
+    "note": "Only frequency/amplitude changes included; no claim of general anomaly reliability. Different image noise can shift the reference distribution."
+  },
+  "elapsed_seconds": 470.43657745805103,
+  "protocol": {
+    "training_seeds": "10000..19999 for supplied MLP",
+    "benchmark_seeds": [
+      82101,
+      82102,
+      82103
+    ],
+    "dc_alignment": "Estimate and truth each centered once per clip; no fitted gain correction.",
+    "uncertainty": "95% percentile bootstrap over texture-seed cluster means (2000 replicates); repeats at different noise/axes stay in the same cluster. Only three texture seeds per family: exploratory, not instrument calibration.",
+    "method_notes": "Phase is an original quadrature-band estimator, not the complete Wadhwa pyramid algorithm. Ablation uses the MLP middle-scale physical estimate without correction.",
+    "timing": "Per-frame estimator CPU only; excludes image generation, video IO, stabilization, enhancement, plotting and warmup. Not end-to-end throughput."
+  },
+  "original_inference_source_hashes": {
+    "vibescope/motion.py": "c71d088fe7f0c3d9fc5871369dad8d03b68c5f890b71385ca60607d3e7ad02de",
+    "vibescope/learned.py": "6995980c8fb348561681018bd2413244d07b3661a8ef717d53b4caac4e12630b",
+    "vibescope/signals.py": "70470f54791cd516507ffd57cc6aae167483c34a21e4222d12994c06ed061514",
+    "vibescope/anomaly.py": "043b7732311f817b4edc27f20c38e78ae403c9737929734a5cb33f3348a6b22a",
+    "vibescope/models/noise_fusion.npz": "194fb84f67d2b52ef94a207cf655f8c09a7114bae0f1e926c6fd144b407589d8",
+    "scripts/benchmark.py": "03d8262a3c307f4b3ba522bf15e7ceb2f9abc5872d985c5d824f22f53c327219"
+  },
+  "original_inference_source_changed_during_run": true,
+  "signal_metrics_refreshed_from_saved_estimates": true,
+  "ablation_observation_quality_refreshed": true,
+  "refresh_protocol": "Image estimates and reference-screening results retained; spectral metrics, failure cases, aggregates and figure regenerated. Ablation diagnostics recomputed from exact seeded inputs with displacement equality asserted, and its timings refreshed. Estimator/checkpoint/reference hashes required to match."
+}

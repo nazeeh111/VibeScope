@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f0">
+  <title>VibeScope · Video vibration instrument</title>
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="VibeScope home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M3 17h5l3-9 5 17 5-19 3 11h5"/></svg></span><span>Vibe<span class="brand-light">Scope</span></span><span class="brand-version">0.1</span></a>
+    <div class="header-description">VIDEO VIBRATION INSTRUMENT</div>
+    <div class="local-badge"><span></span>Local workspace</div>
+  </header>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Measurement controls">
+      <div class="sidebar-title"><span class="section-number">01</span><h2>Acquisition</h2></div>
+      <label class="upload-zone" id="dropzone" for="fileInput" tabindex="0" role="button" aria-label="Import a video">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m-4 4 4-4 4 4M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>
+        <strong>Import a video</strong><span>Choose a file or drop it here</span>
+      </label>
+      <input id="fileInput" class="visually-hidden" type="file" accept="video/*,.avi,.mov,.mp4,.mkv,.webm">
+      <button class="button demo-button" id="demoButton" type="button"><span aria-hidden="true">↗</span> Open controlled demo <span class="small-badge">SYNTHETIC</span></button>
+      <div class="source-metadata hidden" id="sourceMetadata"><div class="source-file" id="sourceFile"></div><div class="source-facts" id="sourceFacts"></div><div id="sourceKind" class="source-kind"></div></div>
+      <fieldset id="captureTiming" class="timing-config hidden" disabled>
+        <label class="field-label" for="captureFps">Actual capture frame rate <span class="label-unit">fps</span></label>
+        <input id="captureFps" type="number" min="0.1" max="2000" step="any" placeholder="Use file metadata">
+        <p class="field-help">For slow motion, enter the camera capture rate, not the slowed playback rate.</p>
+        <label class="check-field"><input id="assumeCfr" type="checkbox"><span>I confirm constant capture timing<small>Confirm before measurement can run.</small></span></label>
+      </fieldset>
+      <div class="sidebar-divider"></div>
+      <form id="analysisForm">
+        <div class="sidebar-title"><span class="section-number">02</span><h2>Measurement</h2></div>
+        <fieldset id="controls" disabled>
+          <label class="field-label" for="method">Motion estimator</label>
+          <select id="method"><option value="classical">Classical · image registration</option><option value="learned">Noise-aware · compact learned model</option><option value="phase">Phase · classical baseline</option></select>
+          <div class="field-row two-columns">
+            <div><label class="field-label" for="axis">Measurement axis</label><select id="axis"><option value="y">Y · vertical</option><option value="x">X · horizontal</option></select></div>
+            <div><label class="field-label" for="calibration">Scale <span class="label-unit">mm/px</span></label><input id="calibration" type="number" placeholder="Uncalibrated" step="any" min="0.000000001"></div>
+          </div>
+          <div class="field-label label-with-note">Frequency band <span id="nyquistLabel">Hz</span></div>
+          <div class="frequency-inputs"><div><label for="lowHz">LOW / Hz</label><input id="lowHz" type="number" value="1" min="0.01" step="any" required></div><span>→</span><div><label for="highHz">HIGH / Hz</label><input id="highHz" type="number" value="15" min="0.02" step="any" required></div></div>
+
+          <p class="field-help">The band selects motion to visualize. Quantitative measurements use the original frames.</p>
+          <div class="gain-heading"><label class="field-label" for="gain">Visualization gain</label><output id="gainValue" for="gain">20×</output></div><input id="gain" type="range" min="1" max="80" value="20" step="1" aria-describedby="gainHelp"><p class="field-help" id="gainHelp">Total magnification. Enhanced pixels are not a displacement measurement.</p>
+          <label class="check-field"><input id="ringdown" type="checkbox"><span>Fit free-decay damping<small>Only for an isolated ringdown recording</small></span></label>
+          <button class="button primary-button" id="analyzeButton" type="submit" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 8 6-8 6Z"/></svg><span>Run measurement</span></button>
+        </fieldset>
+      </form>
+      <details class="baseline-config" id="baselineConfig">
+        <summary>Reference screening <span>Optional</span></summary>
+        <fieldset id="baselineControls" disabled>
+          <p class="field-help">Compare with independent healthy recordings from the same acquisition setup. Import the JSON reference produced by the baseline command.</p>
+          <label class="field-label" for="baselineFile">Healthy reference JSON</label>
+          <input id="baselineFile" type="file" accept="application/json,.json">
+          <p id="baselineSummary" class="baseline-summary">No reference loaded. No anomaly assessment will be issued.</p>
+          <label class="check-field"><input id="baselineConfirmed" type="checkbox" disabled><span>Same acquisition setup<small>I confirm the same timing, exposure, regions, axis, pixel scale and estimator.</small></span></label>
+          <button id="clearBaseline" type="button" class="text-button" disabled>Remove reference</button>
+          <p class="field-help">A changed reference distance does not identify damage or diagnose a fault.</p>
+        </fieldset>
+      </details>
+      <div id="jobStatus" class="job-status hidden" role="status" aria-live="polite"></div>
+      <div class="sidebar-footer"><span class="status-dot"></span> CPU-ready · No cloud upload<p>Videos and analysis stay on this machine.</p></div>
+    </aside>
+    <main>
+      <div class="workspace-heading"><div><p class="eyebrow">MEASUREMENT WORKSPACE</p><h1 id="workspaceTitle">Make the invisible measurable.</h1><p class="workspace-subtitle" id="workspaceSubtitle">Select a region. Isolate a frequency. Inspect the evidence.</p></div><span class="session-tag" id="sessionTag">NO RECORDING</span></div>
+      <div class="error-banner hidden" id="errorBanner" role="alert" tabindex="-1"></div>
+      <div class="evidence-banner" id="evidenceBanner"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2 2 17h16L10 2Z"/><path d="M10 7v4m0 3h.01"/></svg><p>Measurement starts with the source. Frame timing, texture and calibration determine what this instrument can resolve.</p></div>
+      <section class="viewer-section" aria-labelledby="viewerHeading">
+        <div class="section-heading"><h2 id="viewerHeading">Motion inspection</h2><div class="viewer-tools"><button class="chip active" id="measurementTool" type="button" disabled><span class="roi-dot"></span>Measurement region</button><button class="chip" id="referenceTool" type="button" disabled><span class="reference-dot"></span>Stationary reference</button><button class="text-button" id="clearRoi" type="button" disabled>Clear</button></div></div>
+        <div class="video-grid">
+          <article class="video-panel"><div class="panel-heading"><h3><span class="panel-dot"></span>Original</h3><span id="originalCaption">SOURCE FRAMES</span></div><div class="video-stage" id="sourceStage"><div class="empty-view" id="sourceEmpty"><svg viewBox="0 0 80 60" aria-hidden="true"><path d="M6 8h68v44H6Z"/><path d="M6 20h68M18 8v44M62 8v44"/><path class="accent-stroke" d="m28 23 20 10-20 10Z"/></svg><strong>Your recording, in focus.</strong><span>Import a video or open the controlled demo.</span></div><img id="previewImage" class="hidden" alt="First frame of imported recording"><video id="originalVideo" class="hidden" muted playsinline preload="metadata" aria-label="Original recording"></video><canvas id="roiCanvas" class="hidden" tabindex="0" aria-label="Drag to select a rectangular measurement region. Exact coordinates can be edited below."></canvas><div class="stage-label hidden" id="sourceOverlay">DRAG TO SELECT A REGION</div></div><div class="panel-footer"><span id="sourceDimensions">No source loaded</span><span class="source-provenance" id="sourceProvenance">ORIGINAL</span></div></article>
+          <article class="video-panel enhanced-panel"><div class="panel-heading"><h3><span class="panel-dot enhanced"></span>Motion enhanced</h3><span id="enhancedCaption">VISUALIZATION ONLY</span></div><div class="video-stage" id="enhancedStage"><div class="empty-view" id="enhancedEmpty"><svg viewBox="0 0 80 60" aria-hidden="true"><path d="M8 30h10l6-13 10 28 12-34 9 19h17"/><path d="M8 10v40h64"/></svg><strong>See the selected motion.</strong><span>Enhancement appears after measurement.</span></div><video id="enhancedVideo" class="hidden" muted playsinline preload="metadata" aria-label="Enhanced motion visualization"></video><div class="enhancement-watermark hidden" id="enhancementWatermark">VISUALIZATION · <span id="watermarkGain">20×</span></div></div><div class="panel-footer"><span id="bandCaption">No frequency band processed</span><span>NOT A MEASUREMENT</span></div></article>
+        </div>
+        <div class="playback-bar"><button id="playButton" class="play-button" type="button" aria-label="Play synchronized videos" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 10 7-10 7Z"/></svg></button><span id="currentTime" class="timecode">00:00.000</span><input id="timeline" type="range" min="0" max="1" step="0.001" value="0" disabled aria-label="Video position"><span id="totalTime" class="timecode">00:00.000</span><span class="sync-label"><span></span>Synchronized</span></div>
+        <details class="roi-details" id="roiDetails"><summary><span id="roiSummary">No measurement region selected</span><span>Exact coordinates</span></summary><div class="roi-editor"><div class="roi-editor-label" id="roiEditorLabel">Measurement region · source pixels</div><label>X<input id="roiX" type="number" min="0" step="1"></label><label>Y<input id="roiY" type="number" min="0" step="1"></label><label>Width<input id="roiW" type="number" min="24" step="1"></label><label>Height<input id="roiH" type="number" min="24" step="1"></label><button id="applyRoi" type="button" class="button" disabled>Apply</button></div></details>
+      </section>
+      <section aria-label="Quantitative measurements" class="metrics-grid" id="metricsGrid"><article class="metric"><div class="metric-label">Dominant frequency <span>Hz</span></div><div class="metric-value" id="frequencyValue">—</div><p id="frequencyNote">Awaiting source measurement</p></article><article class="metric"><div class="metric-label">Sine-fit amplitude <span id="amplitudeUnit">px</span></div><div class="metric-value" id="amplitudeValue">—</div><p id="amplitudeNote">Original displacement signal</p></article><article class="metric"><div class="metric-label">Signal quality <span>ESTIMATE</span></div><div class="metric-value quality-value" id="qualityValue">—</div><p id="qualityNote">Texture and tracking agreement</p></article><article class="metric"><div class="metric-label">Free-decay damping <span>ζ</span></div><div class="metric-value" id="dampingValue">—</div><p id="dampingNote">Enable for an isolated ringdown</p></article></section>
+      <section class="chart-grid" aria-label="Signal analysis"><article class="chart-panel"><div class="chart-heading"><div><h2>Displacement</h2><p id="waveformCaption">Original-frame signal · pixels</p></div><div class="chart-legend"><span class="raw-line"></span>Raw<span class="filtered-line"></span>Selected band</div></div><div class="chart-container"><canvas id="waveform" aria-label="Displacement versus time; click to seek the synchronized videos" role="img"></canvas><div class="chart-empty" id="waveformEmpty">The waveform will appear after measurement.</div></div><div class="chart-footer"><span>TIME / s</span><span id="rmsCaption">RMS — px</span></div></article><article class="chart-panel"><div class="chart-heading"><div><h2>Frequency spectrum</h2><p>Power spectral density · px²/Hz</p></div><span class="chart-hint">Click to tune band</span></div><div class="chart-container"><canvas id="spectrum" aria-label="Power spectral density versus frequency; click a frequency to center the analysis band" role="img"></canvas><div class="chart-empty" id="spectrumEmpty">Resolve the frequencies behind the motion.</div></div><div class="chart-footer"><span>FREQUENCY / Hz</span><span id="resolutionCaption">Resolution — Hz</span></div></article></section>
+      <section class="evidence-section" aria-labelledby="evidenceHeading"><div class="section-heading"><h2 id="evidenceHeading">Measurement evidence</h2><span class="small-badge">TRACEABLE OUTPUTS</span></div><div class="evidence-grid"><div class="heatmap-box"><img id="heatmap" class="hidden" alt="Band-limited intensity activity from the original video"><div class="heatmap-empty" id="heatmapEmpty"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 8h32v32H8Zm8 0v32M24 8v32M32 8v32M8 16h32M8 24h32M8 32h32"/></svg><span>Band-limited intensity activity</span></div><p>Normalized intensity RMS in the selected band. Color is not displacement.</p></div><div class="findings"><h3 id="analysisStatus">No measurement yet</h3><p id="analysisSummary">A measurement includes the original signal, selected band, spectral estimate and acquisition limitations.</p><ul id="warningList"><li>Use a stationary camera and a textured region with in-plane motion.</li><li>Frequencies above half the camera frame rate can alias into the result.</li><li>Physical units require a scale in the same plane as the selected region.</li></ul><div class="anomaly-result hidden" id="anomalyResult"></div></div></div><details class="method-details"><summary>How to interpret this measurement <span>+</span></summary><div class="method-copy"><p>VibeScope estimates image-plane translation from the original frames. A separate stationary reference region can remove shared camera translation. Rotation, parallax, rolling shutter, compression, poor texture and lighting changes can still contaminate the signal.</p><p>The displayed frequency is a dominant observed response, not proof of a structural resonance. Damping fits require a free decay. Reported uncertainty describes the estimator or spectral resolution, not a traceable calibration certificate.</p><p>The bundled demo and model training use controlled synthetic motion. Real-world displacement accuracy and diagnostic reliability require independent experimental validation.</p></div></details></section>
+      <div class="export-bar"><div><strong>Keep the measurement, with its context.</strong><span>Original signals, quantitative plots and analysis settings.</span></div><div class="export-actions"><a class="button disabled" id="exportCsv" aria-disabled="true">Signal CSV <span aria-hidden="true">↓</span></a><a class="button disabled" id="exportPlot" aria-disabled="true">Plot <span aria-hidden="true">↓</span></a><a class="button disabled" id="exportReport" aria-disabled="true">Report JSON <span aria-hidden="true">↓</span></a></div></div>
+      <footer class="workspace-footer"><span>VibeScope / Research instrument</span><span>Observe carefully. Measure honestly.</span></footer>
+    </main>
+  </div>
+</body>
+</html>

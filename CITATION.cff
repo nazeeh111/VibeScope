@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use VibeScope, cite the software and the relevant upstream research methods."
+title: "VibeScope: local video vibration measurement"
+type: software
+authors:
+  - family-names: Abdul-Hadi
+    given-names: Nazeeh
+version: 0.1.0
+date-released: 2026-10-25
+url: "https://github.com/nazeeh111/VibeScope"
+repository-code: "https://github.com/nazeeh111/VibeScope"
+license: MIT

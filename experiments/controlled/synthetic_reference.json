@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "scope": "Synthetic 7.3Hz target reference, 60fps, 240samples, pixels; not real equipment.",
+  "fps": 60.0,
+  "sample_count_range": [
+    240,
+    240
+  ],
+  "feature_names": [
+    "log_rms_px",
+    "peak_hz",
+    "harmonic_ratio",
+    "off_peak_energy"
+  ],
+  "center": [
+    -1.721729579187607,
+    7.25,
+    0.008444518207023483,
+    0.0063275740200467445
+  ],
+  "scale": [
+    0.07055899003698035,
+    0.15,
+    0.015,
+    0.02
+  ],
+  "threshold": 1.7080080923935728,
+  "training_records": 200,
+  "calibration_records": 100,
+  "threshold_kind": "Empirical99th percentile; no distribution-free false-alarm guarantee",
+  "calibration_tail_resolution": 0.009900990099009901,
+  "acquisition_match": "User must confirm same camera, ROI, axis, scale, exposure and processing method.",
+  "limitations": "Novelty relative to this reference and acquisition setup only. Not a diagnostic probability. Small calibration sets do not resolve rare false-alarm rates.",
+  "benchmark_seed_ranges": {
+    "train": [
+      710000,
+      710199
+    ],
+    "calibration": [
+      720000,
+      720099
+    ]
+  }
+}

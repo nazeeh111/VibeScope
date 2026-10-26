@@ -1,0 +1,4 @@
+include LICENSE README.md THIRD_PARTY_NOTICES.md
+recursive-include vibescope/static *
+recursive-include vibescope/models *.npz *.json
+recursive-include vibescope/data *.mp4 *.json

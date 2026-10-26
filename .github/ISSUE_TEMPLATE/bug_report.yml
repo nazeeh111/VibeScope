@@ -1,0 +1,22 @@
+name: Bug report
+description: Report a reproducible measurement or interface problem
+title: "[Bug] "
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Include software version, OS, command, video metadata and analysis parameters. Share recordings only when you have permission.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Attach report JSON, error text and synthetic reproduction when possible. Remove private paths or data.

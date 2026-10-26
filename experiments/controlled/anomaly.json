@@ -1,0 +1,57 @@
+{
+  "scope": "Controlled synthetic displacement-waveform experiment only; no physical fault/diagnostic validation.",
+  "train_records": 200,
+  "calibration_records": 100,
+  "test_records": 500,
+  "seed_splits_disjoint": true,
+  "auroc": 0.98255,
+  "auroc_bootstrap_95pct": [
+    0.9728593331372747,
+    0.9903402130155327
+  ],
+  "sensitivity": 0.84,
+  "sensitivity_wilson_95pct": [
+    0.8008643954521175,
+    0.872667244400561
+  ],
+  "specificity": 0.99,
+  "specificity_wilson_95pct": [
+    0.9455138038212967,
+    0.9982325679358592
+  ],
+  "confusion": {
+    "tp": 336,
+    "fn": 64,
+    "fp": 1,
+    "tn": 99
+  },
+  "threshold": 1.7080080923935728,
+  "by_kind": {
+    "healthy": {
+      "n": 100,
+      "flagged": 1
+    },
+    "frequency_shift": {
+      "n": 100,
+      "flagged": 90
+    },
+    "amplitude_change": {
+      "n": 100,
+      "flagged": 93
+    },
+    "harmonic_change": {
+      "n": 100,
+      "flagged": 100
+    },
+    "broadband_noise": {
+      "n": 100,
+      "flagged": 53
+    }
+  },
+  "limitations": [
+    "Reference distribution authored for this target, not generic machinery.",
+    "Threshold set on independent calibration signals; test untouched.",
+    "Input here is synthetic displacement, not camera image. Image-to-signal errors are tested separately.",
+    "Outside-reference means statistical novelty, not damage or defect identification."
+  ]
+}

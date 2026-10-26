@@ -1,0 +1,78 @@
+{
+  "verified_on": "2026-10-25",
+  "environment": "Owned headless Google Chrome against a local VibeScope Python server; actual analysis endpoints, no mocked measurements.",
+  "desktop_viewport_px": [
+    1440,
+    1080
+  ],
+  "mobile_viewport_px": [
+    390,
+    844
+  ],
+  "source_kind": "synthetic",
+  "source_sha256": "6128ee8bd17d0dcb1f5512f55337837b813974b58cf533a02b2912777c8f976e",
+  "observed_frequency_hz": 7.299959660082684,
+  "observed_sine_fit_amplitude_px": 0.2798920570385783,
+  "ground_truth_frequency_hz": 7.3,
+  "ground_truth_amplitude_px": 0.28,
+  "browser_checks_passed": [
+    "Native HTML form validity for the default synthetic demonstration",
+    "Actual original-frame measurement response and synthetic-source labeling",
+    "Original and enhanced H264 playback with shared controls and timeline seek",
+    "Signal CSV, quantitative plot and report JSON returned real artifacts",
+    "Reference JSON import and explicit acquisition-match confirmation gate",
+    "Actual reference scoring reports diagnostic=false and user-declared setup match",
+    "Changing the acquisition axis clears reference confirmation",
+    "Loading a new source clears prior physical scale and free-ringdown declaration",
+    "390px mobile page has no horizontal overflow",
+    "Invalid frequency-band feedback is visible and results are not fabricated"
+  ],
+  "static_file_sha256": {
+    "vibescope/static/app.js": "30b332cab1b33d63c0c7b991c18a5f41a1168ff466dd65af1926420353dd49d3",
+    "vibescope/static/icon.svg": "eb5541d3d31cb2d1e56fdbf9d6d3cfe13634dbb40dd0209054e8cd3cbb0b88c5",
+    "vibescope/static/index.html": "677a8238cab1881056cb99b1e9f5b4453b7ff77999de64bccdeb8096b9b18bec",
+    "vibescope/static/style.css": "6dbd862f0223ad7f512b6aaab692cbffd415c8cdaa49c474ad8441d8839978bb"
+  },
+  "screenshots": [
+    "workspace.png",
+    "workspace-viewport.png",
+    "mobile.png"
+  ],
+  "demonstration_video": {
+    "path": "../demo.mp4",
+    "duration_s": 19.92,
+    "dimensions_px": [
+      1440,
+      1080
+    ],
+    "codec": "H264",
+    "audio": false,
+    "description": "Trimmed actual browser capture of the completed workspace: synchronized playback, waveform inspection, artifact export and acquisition limitations. The specimen video is controlled synthetic motion.",
+    "browser_playback_verified": true,
+    "browser_observation": {
+      "duration_s": 19.92,
+      "played_to_s": 1.2117,
+      "paused": false,
+      "error": null
+    }
+  },
+  "limitations": [
+    "Functional browser evidence does not establish real-world displacement accuracy, resonance identification or machine diagnostic reliability.",
+    "The physical specimen and healthy-reference signals in these checks are synthetic; no independently measured real machine was used."
+  ],
+  "preview_gif": {
+    "path": "../demo.gif",
+    "duration_s": 12.0,
+    "dimensions_px": [
+      800,
+      600
+    ],
+    "frames": 72,
+    "size_bytes": 1888143,
+    "description": "First 12 seconds of the actual completed-workspace screen recording, reduced to 6 fps and a 64-color palette."
+  },
+  "media_sha256": {
+    "docs/demo.mp4": "3bfabc49dc1908bce0707acb8d8177d417094512c46a8b5bd2c569e84c11dc43",
+    "docs/demo.gif": "bf62be17d439b6b3f207380733fc546152fc2a87862cb0bfde43c60a1c84ac65"
+  }
+}
