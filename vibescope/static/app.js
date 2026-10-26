@@ -6,7 +6,7 @@
   const original = $('originalVideo');
   const enhanced = $('enhancedVideo');
   const canvas = $('roiCanvas');
-  const color = { teal: '#12615b', reference: '#c28733', raw: '#b8c3bb', grid: '#e7ece5', text: '#7b8b7c' };
+  const color = { teal: '#73deee', reference: '#f1c580', raw: '#8d9ca6', grid: '#2a3844', text: '#b4c3cd' };
   const fmt = (value, digits = 3) => value !== null && value !== undefined && Number.isFinite(Number(value)) ? Number(value).toFixed(digits) : '—';
   const numeric = value => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value));
   const show = (id, visible = true) => $(id).classList.toggle('hidden', !visible);
@@ -159,12 +159,12 @@
     function draw(roi, reference = false, ghost = false) {
       if (!roi) return;
       const [x, y, w, h] = roi; const c = reference ? color.reference : color.teal;
-      ctx.strokeStyle = c; ctx.fillStyle = reference ? '#c2873316' : '#12615b16'; ctx.lineWidth = 1.5 * scale;
+      ctx.strokeStyle = c; ctx.fillStyle = reference ? '#f1c58020' : '#73deee20'; ctx.lineWidth = 1.5 * scale;
       ctx.setLineDash(ghost ? [5 * scale, 3 * scale] : []); ctx.fillRect(x, y, w, h); ctx.strokeRect(x, y, w, h); ctx.setLineDash([]);
       if (ghost) return;
-      const label = reference ? 'STATIONARY REFERENCE' : 'MEASUREMENT'; ctx.font = `600 ${8 * scale}px sans-serif`;
+      const label = reference ? 'STATIONARY REFERENCE' : 'MEASUREMENT'; ctx.font = `600 ${10 * scale}px sans-serif`;
       const labelWidth = ctx.measureText(label).width + 10 * scale; const labelY = y > 19 * scale ? y - 18 * scale : y;
-      ctx.fillStyle = c; ctx.fillRect(x, labelY, labelWidth, 16 * scale); ctx.fillStyle = '#fff'; ctx.fillText(label, x + 5 * scale, labelY + 11 * scale);
+      ctx.fillStyle = c; ctx.fillRect(x, labelY, labelWidth, 16 * scale); ctx.fillStyle = '#08131a'; ctx.fillText(label, x + 5 * scale, labelY + 11 * scale);
       const s = 3 * scale; ctx.fillStyle = c;
       [[x,y],[x+w,y],[x,y+h],[x+w,y+h]].forEach(([px, py]) => ctx.fillRect(px-s/2, py-s/2, s, s));
     }
@@ -326,7 +326,7 @@
     if (el.width !== Math.round(width*dpr) || el.height !== Math.round(height*dpr)) { el.width = Math.round(width*dpr); el.height = Math.round(height*dpr); }
     const ctx = el.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,width,height);
     const area = {x:40, y:17, w:Math.max(1,width-54), h:Math.max(1,height-45)};
-    ctx.font = '8px ui-monospace, SFMono-Regular, Consolas, monospace'; ctx.lineWidth = .7; ctx.strokeStyle = color.grid;
+    ctx.font = '10px ui-monospace, SFMono-Regular, Consolas, monospace'; ctx.lineWidth = .7; ctx.strokeStyle = color.grid;
     for (let i=0;i<=4;i++) { const y=area.y+area.h*i/4; ctx.beginPath();ctx.moveTo(area.x,y);ctx.lineTo(area.x+area.w,y);ctx.stroke(); }
     for (let i=0;i<=5;i++) { const x=area.x+area.w*i/5; ctx.beginPath();ctx.moveTo(x,area.y);ctx.lineTo(x,area.y+area.h);ctx.stroke(); }
     return {ctx,area,width,height};
@@ -354,7 +354,7 @@
     axisLabels(ctx,area,0,xmax,ymin,ymax);
     ctx.save();ctx.beginPath();ctx.rect(area.x,area.y,area.w,area.h);ctx.clip();
     line(ctx,xs,raw,area,0,xmax,ymin,ymax,color.raw,1);line(ctx,xs,filtered,area,0,xmax,ymin,ymax,color.teal,1.4);
-    const x=area.x+state.currentTime/xmax*area.w;ctx.strokeStyle='#a37b3a';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,area.y);ctx.lineTo(x,area.y+area.h);ctx.stroke();ctx.restore();
+    const x=area.x+state.currentTime/xmax*area.w;ctx.strokeStyle='#f1c580';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,area.y);ctx.lineTo(x,area.y+area.h);ctx.stroke();ctx.restore();
     $('waveform')._plot={area,xmax};
   }
   function drawSpectrum() {
@@ -363,7 +363,7 @@
     if(!s?.frequency_hz?.length){axisLabels(ctx,area,0,state.analysisFps/2||30,0,1);return;}
     const xs=s.frequency_hz,ys=(s.psd_px2_hz||[]).map(v=>numeric(v)?Number(v):0);const xmax=Math.max(Number(xs[xs.length-1]),1e-6);const ymax=ys.reduce((a,b)=>Math.max(a,b),1e-9)*1.15;
     const cfg=state.result.uiSettings;
-    ctx.fillStyle='#12615b0d';ctx.fillRect(area.x+cfg.low_hz/xmax*area.w,area.y,(cfg.high_hz-cfg.low_hz)/xmax*area.w,area.h);
+    ctx.fillStyle='#73deee14';ctx.fillRect(area.x+cfg.low_hz/xmax*area.w,area.y,(cfg.high_hz-cfg.low_hz)/xmax*area.w,area.h);
     axisLabels(ctx,area,0,xmax,0,ymax,v=>v>=10?v.toFixed(0):v>=.01?v.toFixed(2):v.toExponential(0));
     ctx.save();ctx.beginPath();ctx.rect(area.x,area.y,area.w,area.h);ctx.clip();line(ctx,xs,ys,area,0,xmax,0,ymax,color.teal,1.4);ctx.restore();
     const f=state.result.metrics.frequency_hz;

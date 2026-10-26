@@ -36,6 +36,15 @@ For Windows, use the equivalent Python commands in [installation](docs/INSTALLAT
 
 The app refuses invalid bands, poor tracking, detected variable-rate timing and output collisions. Existing source recordings and completed result folders are never overwritten.
 
+## How measurement stays separate from display
+
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/assets/measurement-path-portrait.svg">
+  <img src="docs/assets/measurement-path.svg" alt="Original frames feed tracking and signal analysis. Display gain changes visualizations, never the measured displacement; completed exports retain the results and warnings.">
+</picture>
+
+The optional stationary reference removes image-plane translation before signal analysis. Poor tracking stops the run; a well-tracked clip can still have no resolved periodic component. [Follow the implementation](docs/MEASUREMENT_PATH.md).
+
 ## Controlled evidence
 
 The shipped decoded-video example contains a known **7.3 Hz, 0.28 px** translation plus camera motion. The original-frame pipeline recovers **7.29996 Hz and 0.27989 px** after reference subtraction. This validates that controlled clip, not physical machine accuracy.
