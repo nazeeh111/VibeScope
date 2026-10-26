@@ -21,7 +21,7 @@ cd VibeScope
 ./launch.sh
 ```
 
-Open **http://127.0.0.1:8765**, choose **Load controlled demo**, inspect the moving and stationary regions, then run measurement. Python 3.11–3.14 is required. No cloud account, model API or paid service is used. First setup downloads free Python packages; processing stays local. If port 8765 is occupied, use `./launch.sh --port 8767`.
+Open **http://127.0.0.1:8765**, choose **Open controlled demo**, inspect the moving and stationary regions, then run measurement. Python 3.11–3.14 is required. No cloud account, model API or paid service is used. First setup downloads free Python packages; processing stays local. If port 8765 is occupied, use `./launch.sh --port 8767`.
 
 For Windows, use the equivalent Python commands in [installation](docs/INSTALLATION.md).
 
