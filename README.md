@@ -85,6 +85,6 @@ The synthetic target is intentionally labeled as rendered input. There are no in
 | Training and comparisons | `scripts/`, `experiments/` |
 | Tests and CI | `tests/`, `.github/workflows/ci.yml` |
 
-## License and attribution
+## License
 
-Original code, compact weights and synthetic examples are MIT licensed. Research context includes [STB-VMM](https://github.com/RLado/STB-VMM), [EulerMormer](https://github.com/VUT-HFUT/EulerMormer), [Axial-MM](https://github.com/kaist-ami/Axial-mm), [ViMag](https://github.com/RLado/ViMag) and [phase-based motion processing](https://people.csail.mit.edu/nwadhwa/phase-video/). Upstream model code/weights are external; Axial-MM is not incorporated or redistributed. See [third-party notices](THIRD_PARTY_NOTICES.md).
+Core source, compact weights and synthetic examples use the [MIT license](LICENSE). External baseline code and weights retain their own terms. See [third-party notices](THIRD_PARTY_NOTICES.md).
