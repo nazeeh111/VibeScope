@@ -13,35 +13,35 @@ jobs:
       OMP_NUM_THREADS: '1'
       MPLBACKEND: Agg
       MPL_IGNORE_SYSTEM_FONTS: '1'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ['3.11', '3.12', '3.13', '3.14']
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e '.[dev]'
       - run: python -m pytest -q
       - run: python scripts/benchmark.py --quick --output /tmp/vibescope-benchmark
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: benchmark-${{ matrix.python-version }}
           path: /tmp/vibescope-benchmark
   browser:
     timeout-minutes: 20
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'
       MPL_IGNORE_SYSTEM_FONTS: '1'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.12'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
       - run: pip install -e '.[dev]'
