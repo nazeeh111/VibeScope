@@ -8,9 +8,11 @@ Turn small image-plane motion into displacement histories, frequency spectra and
 
 > **Research release.** Controlled synthetic validation is included. Independent physical calibration and fault-diagnostic validation are pending. Magnified images are visualizations; measurements always come from original decoded frames.
 
-[![VibeScope measurement workspace](docs/demo.gif)](docs/demo.mp4)
+[![VibeScope measurement workspace with the controlled synthetic target](docs/screenshots/workspace-current.png)](docs/demo-current.mp4)
 
-[Watch the demonstration](docs/demo.mp4) · [Workspace screenshot](docs/screenshots/workspace.png) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
+[Watch synchronized playback](docs/demo-current.mp4) · [Desktop](docs/screenshots/workspace-current.png) · [Phone](docs/screenshots/workspace-mobile-current.png) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
+
+The current interface, running the packaged synthetic target. The clip shows playback after measurement completes. [Capture details](docs/MEDIA.md).
 
 ## Start locally
 
