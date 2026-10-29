@@ -8,9 +8,11 @@ Turn small image-plane motion into displacement histories, frequency spectra and
 
 > **Research release.** Controlled synthetic validation is included. Independent physical calibration and fault-diagnostic validation are pending. Magnified images are visualizations; measurements always come from original decoded frames.
 
-[![VibeScope measurement workspace](docs/demo.gif)](docs/demo.mp4)
+[![VibeScope measurement workspace with the controlled synthetic target](docs/screenshots/workspace-current.png)](docs/demo-current.mp4)
 
-[Watch the demonstration](docs/demo.mp4) · [Workspace screenshot](docs/screenshots/workspace.png) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
+[Watch synchronized playback](docs/demo-current.mp4) · [Desktop](docs/screenshots/workspace-current.png) · [Phone](docs/screenshots/workspace-mobile-current.png) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
+
+The current interface, running the packaged synthetic target. The clip shows playback after measurement completes. [Capture details](docs/MEDIA.md).
 
 ## Start locally
 
@@ -24,6 +26,22 @@ cd VibeScope
 Open **http://127.0.0.1:8765**, choose **Open controlled demo**, inspect the moving and stationary regions, then run measurement. Python 3.11–3.14 is required. No cloud account, model API or paid service is used. First setup downloads free Python packages; processing stays local. If port 8765 is occupied, use `./launch.sh --port 8767`.
 
 For Windows, use the equivalent Python commands in [installation](docs/INSTALLATION.md).
+
+Prefer a command-line first run? After setup, generate a new synthetic recording
+and measure it with the moving and stationary regions already specified:
+
+```bash
+.venv/bin/python -m vibescope.cli demo
+.venv/bin/python -m vibescope.cli analyze runs/demo/controlled.mp4 \
+  --output runs/demo-measurement --roi 152 108 32 48 \
+  --reference-roi 32 40 48 72 --band 4 12 --synthetic
+```
+
+The generated target has a known 7.3 Hz, 0.28 px translation plus camera motion.
+The command prints the measured metrics and writes CSV, plots, JSON and playback
+videos. Compare the estimates with that synthetic truth; this is not physical
+validation. Existing recordings/results are preserved. To repeat, choose fresh
+`--output` paths for both commands and use the new video path for analysis.
 
 ## A focused measurement workspace
 

@@ -16,7 +16,10 @@ def main():
     demo = sub.add_parser(
         "demo", help="Generate a labeled controlled synthetic recording"
     )
-    demo.add_argument("--output", type=Path, default=Path("examples"))
+    demo.add_argument(
+        "--output", type=Path, default=Path("runs/demo"),
+        help="New demo destination (default: runs/demo); existing recordings are preserved",
+    )
     measure = sub.add_parser("analyze", help="Measure a local original video")
     measure.add_argument("video", type=Path)
     measure.add_argument("--output", type=Path, required=True)
@@ -76,7 +79,10 @@ def main():
     elif args.command == "demo":
         from .synthetic import make_demo
 
-        path, _ = make_demo(args.output)
+        try:
+            path, _ = make_demo(args.output)
+        except ValueError as error:
+            parser.error(str(error))
         print(path)
     elif args.command == "analyze":
         from .pipeline import analyze
