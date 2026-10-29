@@ -96,4 +96,4 @@ The synthetic target is intentionally labeled as rendered input. There are no in
 
 ## License
 
-Core source, compact weights and synthetic examples use the [MIT license](LICENSE). External baseline code and weights retain their own terms. See [third-party notices](THIRD_PARTY_NOTICES.md).
+Core source, compact weights and synthetic examples use the [MIT license](LICENSE). External baseline code and weights retain their own terms.

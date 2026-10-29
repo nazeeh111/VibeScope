@@ -138,6 +138,6 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python scripts/benchmark_neur
   --source /tmp/vibescope-EulerMormer
 ```
 
-The pinned repository contains the checkpoint used by the evaluator. See [FOUNDATIONS.md](FOUNDATIONS.md) and [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) for the source/licensing boundaries. Published tables must be regenerated when their recorded source hashes no longer match the code being presented.
+The pinned repository contains the checkpoint used by the evaluator. See [FOUNDATIONS.md](FOUNDATIONS.md) for the source/licensing boundaries. Published tables must be regenerated when their recorded source hashes no longer match the code being presented.
 
 A signal-only implementation change can be audited without repeating image inference using `scripts/benchmark.py --refresh-signals` and `scripts/benchmark_neural.py --source /tmp/vibescope-EulerMormer --refresh-signals`. Each refresh verifies the retained inference-source hashes and records the new spectral/report hashes. Changes to estimation, weights or reference screening require the full corresponding experiment.
