@@ -1,0 +1,105 @@
+{
+  "dataset_doi": "10.17632/47y7rwc2yg.1",
+  "dataset_license": "CC BY 4.0",
+  "input_sha256": {
+    "video": "0360bfa8fa39f45c4bb530085deda4b77c87ef9f6e40e5eeb73cadc18f016fd6",
+    "sensors": "eb95278187f0d926f49b77203cb917509f86fac2421e2191e489486f558aab29"
+  },
+  "crop_xywh": [
+    840,
+    350,
+    440,
+    220
+  ],
+  "all_500_decoded_crop_frames_exact": true,
+  "decoded_crop_bgr_sha256": "4f5e4804223af4af92f4eaab25f013b72cf8747409be0a3dd65c58df3d754592",
+  "video_capture_fps_documented": 500,
+  "video_playback_fps": 100,
+  "sensor_sample_rate_hz_documented": 1000,
+  "sensor_duration_s": 13,
+  "sensor_fft_bin_spacing_hz": 0.07692307692307693,
+  "engine_files_sha256": {
+    "pipeline.py": "667a7aac4011ec4044f7d3bcde5bbb0a76be5cf3489f9e9574f65ff585d1069b",
+    "motion.py": "c71d088fe7f0c3d9fc5871369dad8d03b68c5f890b71385ca60607d3e7ad02de",
+    "signals.py": "9d0071e36367ae5548be56eb1e8ab7e4d12fd40fea4d3971dccc6db2f21960b3",
+    "video.py": "92d03ed1711786887e921464eabc800f9e3212b2b195b4ebd33b4db2d65e2159"
+  },
+  "parameters": {
+    "roi": [
+      32,
+      100,
+      112,
+      70
+    ],
+    "reference_roi": [
+      375,
+      42,
+      52,
+      64
+    ],
+    "axis": "y",
+    "low_hz": 10,
+    "high_hz": 80,
+    "gain": 1,
+    "mm_per_px": null,
+    "method": "classical",
+    "ringdown": false,
+    "assume_cfr": true,
+    "fps_override": 500
+  },
+  "video_metrics": {
+    "frequency_hz": 33.347703207905944,
+    "frequency_resolution_hz": 1.0,
+    "frequency_interval_hz": [
+      32.347703207905944,
+      34.347703207905944
+    ],
+    "frequency_interval_kind": "\u00b1 one FFT bin; resolution range, not a calibrated confidence interval",
+    "amplitude_px": 0.07528917727633405,
+    "rms_px": 0.07020112256358349,
+    "noise_floor_px": 0.06994326199035648,
+    "residual_mad_px": 0.06994326199035648,
+    "peak_to_median_psd_db": 35.90574819111668,
+    "tone_explained_variance": 0.4309317927344053,
+    "status": "resolved",
+    "resolver_policy": {
+      "min_peak_to_median_db": 15,
+      "min_full_signal_variance_fraction": 0.15,
+      "interior_peak_required": true
+    },
+    "amplitude_kind": "Peak amplitude of best-fit sinusoid to unfiltered original-frame displacement",
+    "damping_ratio": null,
+    "damping_fit": null,
+    "natural_frequency_hz": null,
+    "sdof_resonance_hz_model": null,
+    "quality": 0.7813036811655364,
+    "rejected_frame_fraction": 0.0,
+    "unobservable_frame_fraction": 0.0,
+    "amplitude_mm": null,
+    "tracking_error_scale_px": 0.02105043540795592,
+    "tracking_error_kind": "Synthetic error scale for learned method; local image-fit scatter for classical; neither is physical confidence.",
+    "anomaly": {
+      "status": "not_assessed",
+      "explanation": "No healthy reference matched to this acquisition setup. No diagnostic inference."
+    }
+  },
+  "sensor_peak_bins_10_to_80_hz": [
+    {
+      "channel": 1,
+      "peak_bin_hz": 33.30769230769231
+    },
+    {
+      "channel": 2,
+      "peak_bin_hz": 16.692307692307693
+    },
+    {
+      "channel": 3,
+      "peak_bin_hz": 33.30769230769231
+    },
+    {
+      "channel": 4,
+      "peak_bin_hz": 33.30769230769231
+    }
+  ],
+  "scope": "One recording and geometry-selected ROI, not a calibrated accuracy benchmark. Sensor and video are not time-aligned. No in-plane scale or channel-to-ROI correspondence established. Rotating features and lighting can produce matching spectral components without proving shaft translation. No amplitude, resonance, diagnostic or general accuracy claim."
+}
