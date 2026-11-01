@@ -67,6 +67,13 @@ The optional stationary reference removes image-plane translation before signal 
 
 The shipped decoded-video example contains a known **7.3 Hz, 0.28 px** translation plus camera motion. The original-frame pipeline recovers **7.29996 Hz and 0.27989 px** after reference subtraction. This validates that controlled clip, not physical machine accuracy.
 
+A separate [external rotor recording check](docs/EXTERNAL_ROTOR.md) compares
+one second of captured video with the frequency content of a published sensor
+file. It resolves 33.35 Hz alongside 33.31 Hz peaks in three sensor channels,
+with 1 Hz video resolution. Synchronization, patch-to-sensor correspondence and
+physical amplitude accuracy are not established. The reproduction helper verifies
+input hashes and preserves the original decoded crop pixels.
+
 ![Controlled benchmark results](experiments/controlled/benchmark.png)
 
 The [full comparison](docs/BENCHMARKS.md) includes classical, phase, learned and real EulerMormer inference, ablations, noise, alternate textures, reference screening, uncertainty and failure cases.
@@ -98,7 +105,11 @@ A dominant response frequency does not establish structural resonance. A novelty
 
 Rolling shutter, camera rotation, parallax, exposure blur, compression, unobserved aliased motion and out-of-plane movement can invalidate a result. A quiet-looking clip can still contain motion above Nyquist. The app cannot infer a trustworthy capture rate from slow-motion playback metadata alone.
 
-The synthetic target is intentionally labeled as rendered input. There are no independently captured laboratory recordings or physical accuracy claims in this release. [Measurement guide](docs/MEASUREMENT.md) describes a ruler/cantilever validation protocol and acceptance evidence needed before making those claims.
+The synthetic target is intentionally labeled as rendered input. The external
+rotor case uses a public captured recording for a limited frequency-content
+comparison; physical displacement accuracy remains unverified.
+[Measurement guide](docs/MEASUREMENT.md) describes a ruler/cantilever validation
+protocol and acceptance evidence needed before making accuracy claims.
 
 ## Project map
 
