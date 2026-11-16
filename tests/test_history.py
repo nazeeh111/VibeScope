@@ -167,6 +167,41 @@ def test_deeply_nested_corruption_does_not_hide_healthy_sibling(tmp_path):
     assert (tmp_path/('a'*32)/'input.video').read_bytes()==b'unchanged'
 
 
+@pytest.mark.parametrize('schema', [None, '', 1, []])
+def test_invalid_manifest_versions_are_partial(tmp_path, schema):
+    for letter in ('a', 'b'):
+        folder = tmp_path / (letter * 32)
+        folder.mkdir()
+        (folder / 'source.json').write_text(json.dumps({
+            'id': folder.name, 'name': letter,
+            'preview_url': f'/data/{folder.name}/preview.png',
+            'width': 320, 'height': 192, 'fps': 60,
+        }))
+        (folder / 'input.video').write_bytes(b'unchanged')
+        (folder / 'preview.png').write_bytes(b'preview')
+    manifest = {} if schema is None else {'schema': schema}
+    (tmp_path / ('a' * 32) / 'source-manifest.json').write_text(json.dumps(manifest))
+    run = tmp_path / ('b' * 32) / ('c' * 32)
+    run.mkdir()
+    (run / 'run-manifest.json').write_text(json.dumps(manifest))
+    with TestClient(create_app(tmp_path)) as client:
+        states = {row['id']: row['state'] for row in client.get('/api/history').json()['recordings']}
+        assert states == {'a' * 32: 'partial', 'b' * 32: 'legacy'}
+        assert client.get('/api/history/' + 'a' * 32).status_code == 404
+        response = client.get('/api/history/' + 'b' * 32)
+        assert response.status_code == 200
+        assert response.json()['runs'] == [{'id': 'c' * 32, 'state': 'partial'}]
+        assert client.get('/api/history/' + 'b' * 32 + '/' + 'c' * 32).status_code == 404
+    assert (tmp_path / ('a' * 32) / 'input.video').read_bytes() == b'unchanged'
+
+
+def test_explicit_future_run_version_remains_incompatible(tmp_path):
+    run = tmp_path / ('c' * 32)
+    run.mkdir()
+    (run / 'run-manifest.json').write_text(json.dumps({'schema': 'vibescope.run.v9'}))
+    assert history.classify_run(run, tmp_path) == 'incompatible'
+
+
 def test_verified_json_uses_same_bytes_for_hash_and_parse(tmp_path):
     source=tmp_path/('a'*32);source.mkdir()
     metadata={'id':source.name,'name':'source','preview_url':f'/data/{source.name}/preview.png',

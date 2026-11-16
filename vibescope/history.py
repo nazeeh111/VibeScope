@@ -164,7 +164,10 @@ def check_source(folder):
             raise ValueError('Source publication is incomplete')
         regular(folder, 'input.video'); regular(folder, 'preview.png')
         return source, 'legacy'
-    if manifest.get('schema') != 'vibescope.source.v1':
+    schema = manifest.get('schema')
+    if not isinstance(schema, str) or not schema:
+        raise ValueError('Missing or invalid source manifest version')
+    if schema != 'vibescope.source.v1':
         raise NotImplementedError('Unsupported source manifest version')
     expected = manifest.get('files')
     if type(expected) is not dict or set(expected) != {'source.json', 'input.video', 'preview.png'}:
@@ -178,7 +181,10 @@ def check_source(folder):
 
 def check_run(folder, source_folder):
     manifest = read_json(folder, 'run-manifest.json')
-    if manifest.get('schema') != 'vibescope.run.v1':
+    schema = manifest.get('schema')
+    if not isinstance(schema, str) or not schema:
+        raise ValueError('Missing or invalid run manifest version')
+    if schema != 'vibescope.run.v1':
         raise NotImplementedError('Unsupported run manifest version')
     expected = manifest.get('files')
     if type(expected) is not dict or set(expected) != set(ARTIFACTS):
