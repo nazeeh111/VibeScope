@@ -22,6 +22,7 @@
     document.body.classList.toggle('busy', busy);
     $('demoButton').disabled = busy;
     $('fileInput').disabled = busy;
+    ['historyRefresh', 'historySource', 'historyOpenSource', 'historyRun', 'historyOpenRun'].forEach(id => { $(id).disabled = busy; });
     $('controls').disabled = busy || !state.source;
     $('captureTiming').disabled = busy || !state.source;
     $('baselineControls').disabled = busy || !state.source;
@@ -134,6 +135,35 @@
     try { loadSource(await request('/api/demo')); setBusy(false, state.roi ? 'Demo ready. Review the regions and run measurement.' : 'Demo ready. Select the moving region to begin.'); }
     catch (e) { error(e.message); setBusy(false, 'Demo could not be loaded.'); }
   });
+  async function refreshHistory() {
+    const history = await request('/api/history');
+    const selected = $('historySource').value; $('historySource').replaceChildren(new Option('Choose a recording', ''));
+    for (const item of history.recordings) $('historySource').add(new Option(`${item.name} · ${item.state}`, item.id));
+    if ([...$('historySource').options].some(option => option.value === selected)) $('historySource').value = selected;
+  }
+  async function openHistorySource() {
+    const id = $('historySource').value; if (!id) throw new Error('Choose a recording first.');
+    const entry = await request(`/api/history/${id}`); loadSource(entry.source);
+    $('historyRun').replaceChildren(new Option('Choose a run', ''));
+    for (const run of entry.runs) { const option = new Option(`${run.id.slice(0, 12)} · ${run.state}`, run.id); option.disabled = run.state !== 'completed'; $('historyRun').add(option); }
+    text('historyNote', `Recording ${entry.state}. Only verified completed runs can be reopened. Up to ${entry.limit} entries are scanned.`);
+  }
+  $('historyRefresh').addEventListener('click', async () => { try { await refreshHistory(); } catch (e) { error(e.message); } });
+  $('historyOpenSource').addEventListener('click', async () => { if (state.busy) return; clearError(); setBusy(true, 'Opening local recording…'); try { await openHistorySource(); setBusy(false, 'Recording opened.'); } catch (e) { error(e.message); setBusy(false, 'Could not open recording.'); } });
+  $('historyOpenRun').addEventListener('click', async () => {
+    if (state.busy) return; const id = $('historySource').value, run = $('historyRun').value;
+    if (!id || !run) { error('Choose a completed run first.'); return; }
+    clearError(); setBusy(true, 'Verifying the saved measurement…');
+    try {
+      const saved = await request(`/api/history/${id}/${run}`); loadSource(saved.source); const p = saved.parameters;
+      state.roi = p.roi; state.reference = p.reference_roi; $('axis').value = p.axis; $('method').value = p.method;
+      $('lowHz').value = p.low_hz; $('highHz').value = p.high_hz; $('gain').value = p.gain; text('gainValue', `${p.gain}×`);
+      $('captureFps').value = p.fps_override ?? ''; $('assumeCfr').checked = p.assume_cfr; $('calibration').value = p.mm_per_px ?? ''; $('ringdown').checked = p.ringdown;
+      if (saved.baseline) { state.baseline = saved.baseline; $('baselineConfirmed').checked = true; text('baselineSummary', `${saved.baseline.scope} · restored verified reference`); }
+      updateRoiUI(); drawRois(); renderResult(saved.report, p); setBusy(false, 'Saved measurement verified and opened. Rerunning creates a new run.');
+    } catch (e) { error(e.message); setBusy(false, 'Saved measurement could not be verified.'); }
+  });
+  refreshHistory().catch(() => {});
   function roiPoint(event) {
     const rect = canvas.getBoundingClientRect();
     return [Math.max(0, Math.min(canvas.width, (event.clientX - rect.left) / rect.width * canvas.width)), Math.max(0, Math.min(canvas.height, (event.clientY - rect.top) / rect.height * canvas.height))];

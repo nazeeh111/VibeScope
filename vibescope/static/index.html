@@ -24,6 +24,14 @@
       </label>
       <input id="fileInput" class="visually-hidden" type="file" accept="video/*,.avi,.mov,.mp4,.mkv,.webm">
       <button class="button demo-button" id="demoButton" type="button"><span aria-hidden="true">↗</span> Open controlled demo <span class="small-badge">SYNTHETIC</span></button>
+      <details class="baseline-config" id="historyPanel"><summary>Local history <span>Recordings &amp; runs</span></summary>
+        <label class="field-label" for="historySource">Recording</label><select id="historySource"><option value="">Choose a recording</option></select>
+        <button class="button" id="historyRefresh" type="button">Refresh history</button>
+        <button class="button" id="historyOpenSource" type="button">Open recording</button>
+        <label class="field-label" for="historyRun">Measurement run</label><select id="historyRun"><option value="">Choose a run</option></select>
+        <button class="button" id="historyOpenRun" type="button">Open completed run</button>
+        <p class="field-help" id="historyNote">History scans up to 100 entries per folder. Incomplete and incompatible runs cannot be opened as completed measurements.</p>
+      </details>
       <div class="source-metadata hidden" id="sourceMetadata"><div class="source-file" id="sourceFile"></div><div class="source-facts" id="sourceFacts"></div><div id="sourceKind" class="source-kind"></div></div>
       <fieldset id="captureTiming" class="timing-config hidden" disabled>
         <label class="field-label" for="captureFps">Actual capture frame rate <span class="label-unit">fps</span></label>

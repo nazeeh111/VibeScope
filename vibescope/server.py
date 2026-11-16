@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field, ConfigDict
 from .video import metadata
 from .pipeline import analyze
 from .synthetic import make_demo
+from . import history, __version__
 
 MAX_UPLOAD = 120 * 1024 * 1024
 
@@ -66,14 +67,21 @@ def create_app(data_dir=None):
     def register(path, name, kind="user_recording", truth=None, video_id=None):
         video_id = video_id or uuid.uuid4().hex
         folder = root / video_id
+        if folder.is_symlink():
+            raise ValueError("Recording folder cannot be linked.")
         folder.mkdir(exist_ok=True)
         dest = folder / "input.video"
         if Path(path).resolve() != dest:
-            shutil.copyfile(path, dest)
+            if dest.exists() or dest.is_symlink():
+                raise ValueError("Recording already exists; existing media was preserved.")
+            with Path(path).open('rb') as src, dest.open('xb') as dst:
+                shutil.copyfileobj(src, dst)
         frames, info = metadata(dest)
-        cv2.imwrite(
-            str(folder / "preview.png"), cv2.cvtColor(frames[0], cv2.COLOR_RGB2BGR)
-        )
+        ok, encoded = cv2.imencode('.png', cv2.cvtColor(frames[0], cv2.COLOR_RGB2BGR))
+        if not ok:
+            raise ValueError('Could not encode recording preview.')
+        with (folder / 'preview.png').open('xb') as preview:
+            preview.write(encoded.tobytes())
         warnings = []
         if kind != "synthetic":
             warnings = [
@@ -82,6 +90,7 @@ def create_app(data_dir=None):
             ]
         info.update(
             id=video_id,
+            history_schema='vibescope.source.v1',
             name=name,
             source_kind=kind,
             preview_url=f"/data/{video_id}/preview.png",
@@ -94,16 +103,79 @@ def create_app(data_dir=None):
                 recommended_band=[4, 12],
                 recommended_axis="x",
             )
-        (folder / "source.json").write_text(json.dumps(info))
+        with (folder / 'source.json').open('x') as source_file:
+            json.dump(info, source_file)
+        history.source_manifest(folder)
         return info
 
     @app.get("/api/health")
     def health():
         return {
             "status": "ok",
-            "version": "0.1.0",
+            "version": __version__,
             "scope": "local experimental video measurement",
         }
+
+    @app.get("/api/history")
+    def list_recordings():
+        recordings = []
+        for identity in history.entries(root):
+            try:
+                folder = history.child(root, identity)
+            except (OSError, ValueError):
+                recordings.append({'id': identity, 'name': 'Recording', 'state': 'unavailable'})
+                continue
+            try:
+                info, state = history.check_source(folder)
+                recordings.append({'id': identity, 'name': info.get('name', 'Recording'), 'state': state})
+            except NotImplementedError:
+                recordings.append({'id': identity, 'name': 'Recording', 'state': 'incompatible'})
+            except (OSError, ValueError, KeyError, TypeError):
+                recordings.append({'id': identity, 'name': 'Recording', 'state': 'partial'})
+        return {'recordings': recordings, 'limit': history.MAX_ENTRIES}
+
+    @app.get("/api/history/{video_id}")
+    def recording_history(video_id: str):
+        try:
+            folder = history.child(root, video_id)
+            source, state = history.check_source(folder)
+            history.regular(folder, 'input.video')
+            history.regular(folder, 'preview.png')
+            if source.get('id') != video_id:
+                raise ValueError('Recording identity mismatch')
+            runs = []
+            for rid in history.entries(folder):
+                try:
+                    state_run = history.classify_run(history.child(folder, rid), folder)
+                except (OSError, ValueError):
+                    state_run = 'unavailable'
+                runs.append({'id': rid, 'state': state_run})
+            return {'source': source, 'state': state, 'runs': runs, 'limit': history.MAX_ENTRIES}
+        except NotImplementedError as error:
+            raise HTTPException(409, str(error)) from error
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            raise HTTPException(404, str(error)) from error
+
+    @app.get("/api/history/{video_id}/{run_id}")
+    def reopen_run(video_id: str, run_id: str):
+        try:
+            source_folder = history.child(root, video_id)
+            source, _ = history.check_source(source_folder)
+            folder = history.child(source_folder, run_id)
+            report, params, baseline_data = history.check_run(folder, source_folder)
+            if source.get('id') != video_id or report.get('id') != run_id or params.get('video_id') != video_id:
+                raise ValueError('Recording or run identity mismatch')
+            baseline = None
+            if params.get('baseline_id'):
+                from .anomaly import validate_reference
+                model = validate_reference(baseline_data)
+                baseline = {key: model[key] for key in ('scope', 'fps', 'training_records', 'calibration_records', 'sample_count_range')}
+                baseline['id'] = params['baseline_id']
+            return {'source': source, 'report': report, 'parameters': params, 'baseline': baseline}
+        except NotImplementedError as error:
+            raise HTTPException(409, str(error)) from error
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            raise HTTPException(404, str(error)) from error
 
     @app.get("/api/demo")
     def demo():
@@ -113,9 +185,15 @@ def create_app(data_dir=None):
             # Fixed ID only for our generated disposable demo, no supplied files overwritten.
             video_id = "f" * 32
             folder = root / video_id
+            if folder.is_symlink():
+                raise HTTPException(409, "Demo folder is linked; existing files were preserved.")
             source = folder / "source.json"
             if source.exists():
-                return json.loads(source.read_text())
+                try:
+                    info, _ = history.check_source(folder)
+                    return info
+                except (ValueError, NotImplementedError, OSError) as error:
+                    raise HTTPException(409, str(error)) from error
             bundled = Path(__file__).with_name("data")
             if (bundled / "controlled.mp4").is_file() and (
                 bundled / "truth.json"
@@ -138,6 +216,8 @@ def create_app(data_dir=None):
                 truth=truth,
                 video_id=video_id,
             )
+        except (ValueError, OSError) as error:
+            raise HTTPException(409, str(error)) from error
         finally:
             lock.release()
 
@@ -200,14 +280,18 @@ def create_app(data_dir=None):
 
     @app.post("/api/analyze")
     def measurement(request: AnalysisRequest):
-        folder = root / request.video_id
+        try:
+            folder = history.child(root, request.video_id)
+        except ValueError as error:
+            raise HTTPException(404, str(error)) from error
         source = folder / "source.json"
         if not source.exists():
             raise HTTPException(404, "Source not found. Import the recording again.")
         if not lock.acquire(blocking=False):
             raise HTTPException(409, "Another job is running. Wait for it to finish.")
         try:
-            info = json.loads(source.read_text())
+            info, _ = history.check_source(folder)
+            history.regular(folder, 'input.video')
             run_id = uuid.uuid4().hex
             destination = folder / run_id
             params = request.model_dump(exclude={"video_id", "baseline_id"})
@@ -248,6 +332,7 @@ def create_app(data_dir=None):
             (destination / "report.json").write_text(
                 json.dumps(result, indent=2, allow_nan=False)
             )
+            history.run_manifest(destination, folder, request.model_dump(), root)
             return result
         except (ValueError, FileNotFoundError) as e:
             raise HTTPException(422, str(e)) from e

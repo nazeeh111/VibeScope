@@ -2,17 +2,27 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from . import __version__
 
 
 def main():
     parser = argparse.ArgumentParser(
         prog="vibescope",
-        description="Local experimental video vibration instrument. No cloud API or diagnostic claims.",
+        description="Measure original-frame image-plane motion locally; visualization gain is separate.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="\n".join([
+            "Start: vibescope serve --data-dir runs",
+            "Reopen: use that same --data-dir after restarting, then Local history.",
+            "CLI: vibescope history --data-dir runs --recording UUID --run UUID",
+            "Use synthetic inputs for a first run. Physical calibration and diagnosis are not established.",
+        ]),
     )
+    parser.add_argument("--version", action="version", version=f"VibeScope {__version__}")
     sub = parser.add_subparsers(dest="command")
     serve = sub.add_parser("serve", help="Launch local workspace (default)")
     serve.add_argument("--port", type=int, default=8765)
-    serve.add_argument("--data-dir", type=Path, default=Path("runs"))
+    serve.add_argument("--data-dir", type=Path, default=Path("runs"),
+                       help="Persistent workspace (default: runs); reuse this path to reopen recordings and runs")
     demo = sub.add_parser(
         "demo", help="Generate a labeled controlled synthetic recording"
     )
@@ -22,18 +32,24 @@ def main():
     )
     measure = sub.add_parser("analyze", help="Measure a local original video")
     measure.add_argument("video", type=Path)
-    measure.add_argument("--output", type=Path, required=True)
-    measure.add_argument("--roi", nargs=4, type=int, required=True)
-    measure.add_argument("--reference-roi", nargs=4, type=int)
+    measure.add_argument("--output", type=Path, required=True, help="New result directory; existing outputs are preserved")
+    measure.add_argument("--roi", nargs=4, type=int, required=True, metavar=("X", "Y", "WIDTH", "HEIGHT"),
+                         help="Measurement rectangle in original source pixels")
+    measure.add_argument("--reference-roi", nargs=4, type=int, metavar=("X", "Y", "WIDTH", "HEIGHT"),
+                         help="Independent stationary rectangle in original source pixels")
     measure.add_argument("--axis", choices=["x", "y"], default="x")
-    measure.add_argument("--band", nargs=2, type=float, default=[4, 12])
-    measure.add_argument("--gain", type=float, default=20)
+    measure.add_argument("--band", nargs=2, type=float, default=[4, 12], metavar=("LOW_HZ", "HIGH_HZ"),
+                         help="Frequency band in Hz, below half the capture rate (default: 4 12)")
+    measure.add_argument("--gain", type=float, default=20,
+                         help="Visualization magnification only; never scales measurements (default: 20)")
     measure.add_argument(
         "--method", choices=["classical", "phase", "learned"], default="classical"
     )
-    measure.add_argument("--mm-per-px", type=float)
-    measure.add_argument("--fps", type=float)
-    measure.add_argument("--confirm-cfr", action="store_true")
+    measure.add_argument("--mm-per-px", type=float,
+                         help="Independently calibrated in-plane mm/px scale; omitted means pixel amplitude")
+    measure.add_argument("--fps", type=float, help="Actual capture rate in frames/s, not slow-motion playback rate")
+    measure.add_argument("--confirm-cfr", action="store_true",
+                         help="Declare constant capture timing; does not repair detected timing gaps")
     measure.add_argument(
         "--synthetic",
         action="store_true",
@@ -57,22 +73,33 @@ def main():
     baseline.add_argument("--fps", type=float, required=True)
     baseline.add_argument("--scope", required=True)
     baseline.add_argument("--output", type=Path, required=True)
+    history = sub.add_parser(
+        "history", help="List or reopen a workspace's recording/run metadata as JSON",
+        description="Read workspace history as JSON. Reuse the server's --data-dir; standalone analyze outputs are separate.",
+    )
+    history.add_argument("--data-dir", type=Path, default=Path("runs"))
+    history.add_argument("--recording", help="Recording UUID from the workspace history list")
+    history.add_argument("--run", help="Completed run UUID; requires --recording")
     args = parser.parse_args()
     if (
         args.command in (None, "serve")
         and not 1 <= getattr(args, "port", 8765) <= 65535
     ):
-        parser.error("Port must be between1 and65535.")
+        parser.error("Port must be between 1 and 65535.")
     if args.command in (None, "serve"):
         import uvicorn
         from .server import create_app
 
         port = getattr(args, "port", 8765)
+        data_dir = getattr(args, "data_dir", Path("runs")).resolve()
         print(
-            f"VibeScope → http://127.0.0.1:{port}\nLocal processing. Ctrl+C to stop. Data stays in runs/ unless --data-dir is supplied."
+            f"VibeScope {__version__} → http://127.0.0.1:{port}\n"
+            f"Workspace: {data_dir}\n"
+            "Local processing. Ctrl+C to stop; reuse this workspace to reopen runs.",
+            flush=True,
         )
         uvicorn.run(
-            create_app(getattr(args, "data_dir", Path("runs"))),
+            create_app(data_dir),
             host="127.0.0.1",
             port=port,
         )
@@ -91,25 +118,55 @@ def main():
             parser.error(
                 "Confirm identical acquisition using --baseline-scope with the exact reference scope."
             )
-        result = analyze(
-            args.video,
-            args.output,
-            args.roi,
-            args.reference_roi,
-            args.axis,
-            *args.band,
-            args.gain,
-            args.mm_per_px,
-            args.method,
-            args.ringdown,
-            args.fps,
-            args.confirm_cfr,
-            "synthetic" if args.synthetic else "user_recording",
-            args.baseline,
-            baseline_scope=args.baseline_scope,
-        )
+        try:
+            result = analyze(
+                args.video,
+                args.output,
+                args.roi,
+                args.reference_roi,
+                args.axis,
+                *args.band,
+                args.gain,
+                args.mm_per_px,
+                args.method,
+                args.ringdown,
+                args.fps,
+                args.confirm_cfr,
+                "synthetic" if args.synthetic else "user_recording",
+                args.baseline,
+                baseline_scope=args.baseline_scope,
+            )
+        except (ValueError, OSError) as error:
+            parser.error(str(error))
+        except KeyboardInterrupt:
+            parser.exit(130, "VibeScope: canceled. Inspect the output path before retrying; use a fresh destination.\n")
         print(json.dumps(result["metrics"], indent=2))
         print(f"Artifacts: {args.output.resolve()}")
+    elif args.command == "history":
+        from . import history as local_history
+        try:
+            root = args.data_dir.resolve(strict=True)
+            if args.run and not args.recording:
+                raise ValueError("A run requires --recording")
+            if not args.recording:
+                result = {"recordings": local_history.entries(root), "limit": local_history.MAX_ENTRIES}
+            else:
+                folder = local_history.child(root, args.recording)
+                source, state = local_history.check_source(folder)
+                if source.get('id') != args.recording:
+                    raise ValueError("Recording identity mismatch")
+                if args.run:
+                    report, params, _ = local_history.check_run(local_history.child(folder, args.run), folder)
+                    if report.get('id') != args.run or params.get('video_id') != args.recording:
+                        raise ValueError("Run identity mismatch")
+                    result = {"source": source, "report": report, "parameters": params}
+                else:
+                    result = {"source": source, "state": state, "runs": [
+                        {"id": rid, "state": local_history.classify_run(local_history.child(folder, rid), folder)}
+                        for rid in local_history.entries(folder)]}
+            print(json.dumps(result, indent=2, allow_nan=False))
+        except (OSError, ValueError, KeyError, TypeError, NotImplementedError) as error:
+            parser.error(str(error))
     else:
         import numpy as np
         from .anomaly import train_reference

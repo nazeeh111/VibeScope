@@ -1,6 +1,7 @@
 """Analysis orchestration. Original-frame estimates never depend on display gain."""
 
 from __future__ import annotations
+from . import __version__
 import csv
 import hashlib
 import json
@@ -361,7 +362,7 @@ def _analyze(
         ),
     )
     result["metadata"]["analysis_seconds"] = time.perf_counter() - started
-    result["metadata"]["software_version"] = "0.1.0"
+    result["metadata"]["software_version"] = __version__
     (directory / "report.json").write_text(
         json.dumps(result, indent=2, allow_nan=False)
     )

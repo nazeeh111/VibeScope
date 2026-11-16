@@ -16,6 +16,8 @@ The current interface, running the packaged synthetic target. The clip shows pla
 
 ## Start locally
 
+Current source is the unreleased **0.1.1.dev0** development version. The retained screenshots, benchmark receipts and 0.1.0 release artifacts describe their recorded source generations. Run `vibescope --version` to identify your installed command; new reports record `metadata.software_version`.
+
 ```bash
 git clone https://github.com/nazeeh111/VibeScope.git
 cd VibeScope
@@ -37,7 +39,7 @@ and measure it with the moving and stationary regions already specified:
   --reference-roi 32 40 48 72 --band 4 12 --synthetic
 ```
 
-The generated target has a known 7.3 Hz, 0.28 px translation plus camera motion.
+The generated target has a known 7.3 Hz, 0.28 px translation plus camera motion. `--roi` and `--reference-roi` use source pixels as `x y width height`; `--band 4 12` is in Hz. The `--synthetic` label is for generated inputs only.
 The command prints the measured metrics and writes CSV, plots, JSON and playback
 videos. Compare the estimates with that synthetic truth; this is not physical
 validation. Existing recordings/results are preserved. To repeat, choose fresh
@@ -48,11 +50,28 @@ validation. Existing recordings/results are preserved. To repeat, choose fresh
 - Import local MP4/MOV/AVI, select a textured measurement region and an independent stationary reference.
 - Confirm the **capture frame rate**, choose x/y displacement and a frequency band below Nyquist.
 - Inspect synchronized original/enhanced video, an activity map, raw/band-limited displacement and power spectrum.
-- Read the dominant response frequency, sine-fit peak amplitude, tracking quality and resolution. Enter an in-plane mm/px scale when independently calibrated.
+- Read the dominant response frequency, sine-fit peak amplitude, tracking quality and resolution. Amplitude is a fitted peak in pixels, not peak-to-peak motion or magnified display displacement. Enter an in-plane mm/px scale when independently calibrated.
 - Fit damping only for a declared isolated free ringdown. Screen novelty only against recordings from the same acquisition setup.
 - Export CSV, plots, report JSON and videos. Every result retains parameters, source hash and evidence limitations.
 
 The app refuses invalid bands, poor tracking, detected variable-rate timing and output collisions. Existing source recordings and completed result folders are never overwritten.
+
+## Return to a measurement
+
+The workspace keeps recordings and measurements in `runs/`. Choose **Local history → Refresh history**, open a recording, then select **Open completed run** to restore its regions, reference, timing, band and display settings. A new measurement creates a new run, preserving the prior result. After stopping the server, launch it with the **same data directory** to reopen that workspace:
+
+```bash
+./launch.sh --data-dir runs
+.venv/bin/python -m vibescope.cli history --data-dir runs
+.venv/bin/python -m vibescope.cli history --data-dir runs --recording RECORDING_UUID
+.venv/bin/python -m vibescope.cli history --data-dir runs \
+  --recording RECORDING_UUID --run RUN_UUID
+```
+
+Replace the UUID placeholders with IDs returned by history. The CLI returns JSON metadata; open the browser workspace to play a saved measurement. Standalone CLI `demo` and `analyze` outputs remain separate artifact folders and are not registered as workspace history. History inspects at most 100 directory entries per folder, including unrelated entries; it is not an exhaustive archive browser. Incomplete, changed or unsupported run publications cannot be opened as completed measurements. Legacy recording metadata may be listed without the newer source manifest.
+
+History verifies bounded snapshots against local manifests. These hashes do not authenticate files or guarantee the separately served `/data` downloads still have those bytes when delivered. Keep independent backups of originals and useful outputs. See [installation and saved work](docs/INSTALLATION.md#saved-work-and-history).
+
 
 ## How measurement stays separate from display
 
@@ -88,7 +107,7 @@ See the [model card](docs/MODEL_CARD.md), [benchmark results](docs/BENCHMARKS.md
 
 ## Reproduce
 
-The local release suite contains **50 passing tests**. CI also runs the real browser workflow, including H264 playback and reference screening.
+The current source suite includes measurement, refusal, history, same-byte snapshot and nonblocking named-pipe controls. The retained release receipts and browser captures keep their original scope; rerun the checks for this checkout. CI defines a browser workflow, including H264 playback and reference screening; a local source test pass does not establish a new hosted CI run.
 
 ```bash
 .venv/bin/python -m pytest -q

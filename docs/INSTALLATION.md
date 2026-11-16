@@ -41,6 +41,16 @@ The default limits are 120 MiB per uploaded video, 900 decoded frames, 1920 pixe
 
 `imageio-ffmpeg` supplies a separately installed FFmpeg binary for generated playback videos. These browser exports use H264420 CRF8. They are display encodes rather than pixel-identical archival copies; every quantitative estimate precedes re-encoding. Synthetic source generation uses CRF0 coding after RGB→YUV conversion, which is not bit-exact RGB preservation. Odd dimensions are padded by one pixel for video playback; measurement coordinates and units retain the original decoded dimensions.
 
+## Saved work and history
+
+Use the same `serve --data-dir` path after restarting. The CLI startup message prints its resolved workspace path. In the app, expand **Local history**, refresh, open a recording, then open a completed run. Saved measurement and reference regions use original source pixels; scale is mm/px, band is Hz, and timing is the actual capture rate. Reopen restores the saved parameters and evidence warnings; rerunning creates another result rather than replacing the old one.
+
+`vibescope history --data-dir PATH` lists workspace recording IDs as JSON. Add `--recording UUID` to inspect one recording and its run states, then `--run UUID` to read a completed report and its restored parameters. This reads metadata; it does not start playback or register standalone `demo`/`analyze` output folders. The scan stops after 100 directory entries per folder, including unrelated entries.
+
+A completed state means the saved publication passed the current bounded history checks. Partial, unavailable and incompatible states are not completed measurements. Legacy recording metadata can be listed without a new source manifest. A changed source, report, reference or artifact is refused when the local manifest no longer matches. Hashes are consistency checks, not authentication. The separate `/data` delivery route does not revalidate those history snapshots at download time.
+
+The command's `--version`, health endpoint and newly generated report metadata identify current software. Historical reports retain their original version. Invalid analysis input exits 2 with a short refusal; interrupted CLI analysis exits 130 and asks you to inspect the output before retrying. Interruption handling is not crash recovery or a guarantee against partial files under forced termination. Back up original media independently.
+
 ## Optional neural baseline and acceleration
 
 Core inference does not import PyTorch. To run the external EulerMormer baseline:
