@@ -1,0 +1,81 @@
+{
+  "source_commit": "db2594d6ff15d75151785c388ed35c473533d3b9",
+  "source_tree": "0386b5004fabaa1408c455c50b47c8613b9a7675",
+  "kind": "new actual controlled-synthetic browser measurements, gains5and20, same source",
+  "source_sha256": "6128ee8bd17d0dcb1f5512f55337837b813974b58cf533a02b2912777c8f976e",
+  "software_version": "0.1.1.dev0",
+  "signal_arrays_equal": true,
+  "metrics_equal": true,
+  "frame_inputs": {
+    "original": {
+      "path": "original-frame72.png",
+      "video_sha256": "aa2d30fb6a1cb3b8a6a814b8b3e21ed9cdf4b142621c53857be3372cd7d30973",
+      "frame_index": 72,
+      "native_shape": [
+        192,
+        320,
+        3
+      ],
+      "decoded_rgb_sha256": "dba33e93cc5b76f796e071835ca6234572d787c65b990ec0dedf23099e0604b9",
+      "png_sha256": "08eeb3b37ff278398d8af8699128110cd505f1570954a22cb973c78b5f8651f6"
+    },
+    "enhanced": {
+      "path": "enhanced-frame72.png",
+      "video_sha256": "32ef810344ba133bae71e0fdb84083b90809b654313a336ef600811e8bd03c90",
+      "frame_index": 72,
+      "native_shape": [
+        192,
+        320,
+        3
+      ],
+      "decoded_rgb_sha256": "a10accde0c58298dfcc21e15bb3edf0b56c36da0483c3333d428a98492c96686",
+      "png_sha256": "da9b3af617c00e113c160ae7dcb01b398f507927cd4f683dbf2da974a703dc79"
+    },
+    "measurement-story": {
+      "encoded_vertices": {
+        "gain5-signal": 240,
+        "gain20-signal": 240,
+        "psd-source": 120
+      },
+      "png_sha256": "ed76b2df641a2cccb533d7608eb06a6e0f15751119a6203bbafe12486de680dc",
+      "svg_sha256": "c02d1b24306f297a07d177f4da111c8ded6a9bbdfc15fc9d4ad6ce93860c8118"
+    },
+    "measurement-story-mobile": {
+      "encoded_vertices": {
+        "gain5-signal": 240,
+        "gain20-signal": 240,
+        "psd-source": 120
+      },
+      "png_sha256": "ef0143a36c2cdbd82310639b1ff9e63d56c0dce9ee42a8b51a2b9817cdb74e76",
+      "svg_sha256": "3f6df551154c1ebf3a6e01cc3a62f4451f8148360acb0a3dedfd9406420ab659"
+    }
+  },
+  "transformations": [
+    "Native320\u00d7192 decoded frame72 from each actual run output; no pixel adjustments. Nearest-neighbor enlargement is display only.",
+    "All240 stored unfiltered displacement samples from both gains retained without simplification.",
+    "Spectrum uses all positive-frequency stored bins; DC bin explicitly excluded from logarithmic plot. No new fit, filtering, smoothing or numerical normalization.",
+    "Video gain is already the actual application visualization; it never scales the measured displacement."
+  ],
+  "limits": [
+    "Controlled synthetic source; no physical calibration, arbitrary-media or diagnostic-accuracy claim.",
+    "The report frequency resolution is not a calibrated confidence interval."
+  ],
+  "font_policy": [
+    "DejaVu Sans",
+    "Arial",
+    "sans-serif"
+  ],
+  "svg_font_policy": "Explicit DejaVu Sans/Arial/sans-serif fallback on text elements, mathtext parents and tspans; numeric geometry unchanged",
+  "runtime": {
+    "python": "3.13.2 (v3.13.2:4f8bb3947cf, Feb  4 2025, 11:51:10) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "numpy": "2.5.5",
+    "matplotlib": "3.11.2",
+    "opencv": "5.0.0"
+  },
+  "input_hashes": {
+    "gain5-report.json": "a60eb313f4f8cafc727f841c56c0b20d6876c9096c23049949d1ca73420a3fae",
+    "gain20-report.json": "e1be14fde2a8184a2bfe2b27115d2bfc3621a5c6d0c4239f4fff62b43144932c",
+    "gain5-displacement.csv": "fb90300dba4560c10bb828826d56f875c52f51736cfb31a631f4ace49877853a",
+    "gain20-displacement.csv": "fb90300dba4560c10bb828826d56f875c52f51736cfb31a631f4ace49877853a"
+  }
+}
