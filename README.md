@@ -4,11 +4,7 @@
 
 Track image-plane vibration in local video, subtract a stationary reference, and inspect displacement and frequency together. Visualization gain changes playback, never the measured signal.
 
-[Run the controlled demo](#start-locally)
-[Follow the paired-gain case](#one-recording-two-display-gains)
-[Reopen saved work](#return-to-a-measurement)
-[Measurement guide](docs/MEASUREMENT.md)
-[Benchmark evidence](docs/BENCHMARKS.md)
+[Run the controlled demo](#start-locally) · [Follow the paired-gain case](#one-recording-two-display-gains) · [Reopen saved work](#return-to-a-measurement) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
 
 > **Research release.** Controlled synthetic validation is included. Independent physical calibration and fault-diagnostic validation are pending. Magnified images are visualizations; measurements come from original decoded frames.
 
