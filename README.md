@@ -1,18 +1,36 @@
 # VibeScope
 
-[![Measurement checks](https://github.com/nazeeh111/VibeScope/actions/workflows/ci.yml/badge.svg)](https://github.com/nazeeh111/VibeScope/actions/workflows/ci.yml)
+**Measure the original. Magnify the view.**
 
-**A video vibration microscope built around measurement.**
+Track image-plane vibration in local video, subtract a stationary reference, and inspect displacement and frequency together. Visualization gain changes playback, never the measured signal.
 
-Turn small image-plane motion into displacement histories, frequency spectra and selective motion visualizations. Runs locally on a CPU, with a compact trained motion estimator and reproducible comparisons against classical and neural methods.
+[Run the controlled demo](#start-locally) · [Follow the paired-gain case](#one-recording-two-display-gains) · [Reopen saved work](#return-to-a-measurement) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
 
-> **Research release.** Controlled synthetic validation is included. Independent physical calibration and fault-diagnostic validation are pending. Magnified images are visualizations; measurements always come from original decoded frames.
+> **Research release.** Controlled synthetic validation is included. Independent physical calibration and fault-diagnostic validation are pending. Magnified images are visualizations; measurements come from original decoded frames.
 
-[![VibeScope measurement workspace with the controlled synthetic target](docs/screenshots/workspace-current.png)](docs/demo-current.mp4)
+<a href="docs/presentation/measurement-story.svg">
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/presentation/measurement-story-mobile.png">
+  <img src="docs/presentation/measurement-story.png" width="1000" alt="Actual controlled synthetic video before and after display magnification, beside identical original-frame displacement traces for gains 5 and 20 and a power spectrum peaking near 7.3 hertz.">
+</picture>
+</a>
 
-[Watch synchronized playback](docs/demo-current.mp4) · [Desktop](docs/screenshots/workspace-current.png) · [Phone](docs/screenshots/workspace-mobile-current.png) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
+Two fresh measurements of the same packaged synthetic recording, using display gains **5 and 20**. Their complete **240-sample displacement arrays, quantitative metrics and exported CSV bytes match exactly**. The images show the same output frame at 1.2 seconds; nearest-neighbor enlargement adds no image detail. This is a controlled case, not physical validation. [Data, rendering and runtime provenance](docs/presentation/README.md).
 
-The current interface, running the packaged synthetic target. The clip shows playback after measurement completes. [Capture details](docs/MEDIA.md).
+## One recording, two display gains
+
+The packaged target has known **7.3 Hz, 0.28 px** image-plane translation plus camera motion. Both runs recovered **7.29996 Hz and 0.27989 px** after stationary-reference subtraction. Amplitude is the fitted sinusoidal peak in the original displacement, not peak-to-peak travel or the motion shown by the enhanced video.
+
+| Operation | What remains inspectable |
+| --- | --- |
+| Open the controlled demo | Synthetic source identity, source-pixel measurement and stationary-reference regions |
+| Measure with gain 5, then gain 20 | Separate completed runs, equal measurement arrays, different visualization settings |
+| Export | Displacement CSV, spectrum/plot, report JSON and synchronized video artifacts |
+| Restart with the same workspace | Reopen the completed gain-20 run with its regions, band, metrics and display setting |
+
+This November 17, 2026 browser journey ran current **0.1.1.dev0** source, including real synchronized playback and restart/reopen. The declared 60 fps synthetic target was used; this environment lacked `ffprobe`, so the report explicitly retains unverified presentation timing. No millimetre scale, physical calibration, resonance or diagnosis is claimed. [Gain-5 report](docs/presentation/gain5-report.json), [gain-20 report](docs/presentation/gain20-report.json), [gain-5 CSV](docs/presentation/gain5-displacement.csv) and [gain-20 CSV](docs/presentation/gain20-displacement.csv) retain the actual outputs.
+
+[Inspect the current workspace](docs/presentation/workspace-current.png) or the retained [October 2026 playback clip](docs/demo-current.mp4), [desktop](docs/screenshots/workspace-current.png), [phone](docs/screenshots/workspace-mobile-current.png) and [capture details](docs/MEDIA.md). The retained release media and benchmarks keep their original source generation.
 
 ## Start locally
 

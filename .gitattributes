@@ -4,3 +4,6 @@
 *.mp4 binary
 *.npy binary
 *.npz binary
+
+# Retain exact exported measurement bytes for their published SHA-256 provenance.
+docs/presentation/*-displacement.csv -text -eol
