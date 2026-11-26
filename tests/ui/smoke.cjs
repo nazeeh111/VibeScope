@@ -33,6 +33,30 @@ const url = process.env.VIBESCOPE_URL || 'http://127.0.0.1:8765';
     await page.waitForTimeout(150);
     media=await page.evaluate(()=>[document.querySelector('#originalVideo').currentTime,document.querySelector('#enhancedVideo').currentTime]);
     assert.ok(media.every(t=>Math.abs(t-1.2)<.1),'Timeline seeks both videos');
+    const csv = await page.request.get(await page.locator('#exportCsv').getAttribute('href'));
+    assert.ok(csv.ok());
+    const samples = (await csv.text()).trim().split(/\r?\n/).slice(1).map(row=>row.split(',').map(Number));
+    async function checkFrame(index){
+      await page.waitForFunction(expected=>document.querySelector('#frameNumber').textContent===expected,
+        `Frame ${index+1} of ${samples.length}`);
+      const [t,raw,band]=samples[index];
+      assert.equal(await page.locator('#sampleTime').innerText(),t.toFixed(6)+' s');
+      assert.equal(await page.locator('#sampleRaw').innerText(),raw.toFixed(5)+' px');
+      assert.equal(await page.locator('#sampleBand').innerText(),band.toFixed(5)+' px');
+    }
+    await checkFrame(72);
+    await page.locator('#nextFrame').focus();
+    await page.keyboard.press('Enter');
+    await checkFrame(73);
+    await page.locator('#previousFrame').click();
+    await checkFrame(72);
+    await page.locator('#timeline').focus();
+    await page.keyboard.press('End');
+    await checkFrame(samples.length-1);
+    assert.equal(await page.locator('#nextFrame').getAttribute('aria-disabled'),'true');
+    await page.keyboard.press('Home');
+    await checkFrame(0);
+    assert.equal(await page.locator('#previousFrame').getAttribute('aria-disabled'),'true');
     for(const id of ['exportCsv','exportPlot','exportReport']){
       const href=await page.locator('#'+id).getAttribute('href');
       const response=await page.request.get(href);

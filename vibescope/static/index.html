@@ -84,6 +84,20 @@
           <article class="video-panel enhanced-panel"><div class="panel-heading"><h3><span class="panel-dot enhanced"></span>Motion enhanced</h3><span id="enhancedCaption">VISUALIZATION ONLY</span></div><div class="video-stage" id="enhancedStage"><div class="empty-view" id="enhancedEmpty"><svg viewBox="0 0 80 60" aria-hidden="true"><path d="M8 30h10l6-13 10 28 12-34 9 19h17"/><path d="M8 10v40h64"/></svg><strong>See the selected motion.</strong><span>Enhancement appears after measurement.</span></div><video id="enhancedVideo" class="hidden" muted playsinline preload="metadata" aria-label="Enhanced motion visualization"></video><div class="enhancement-watermark hidden" id="enhancementWatermark">VISUALIZATION · <span id="watermarkGain">20×</span></div></div><div class="panel-footer"><span id="bandCaption">No frequency band processed</span><span>NOT A MEASUREMENT</span></div></article>
         </div>
         <div class="playback-bar"><button id="playButton" class="play-button" type="button" aria-label="Play synchronized videos" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 10 7-10 7Z"/></svg></button><span id="currentTime" class="timecode">00:00.000</span><input id="timeline" type="range" min="0" max="1" step="0.001" value="0" disabled aria-label="Video position"><span id="totalTime" class="timecode">00:00.000</span><span class="sync-label"><span></span>Synchronized</span></div>
+        <section class="frame-readout hidden" id="frameReadout" aria-label="Source-frame displacement">
+          <div class="frame-position">
+            <div class="frame-controls" role="group" aria-label="Step through measured frames">
+              <button id="previousFrame" type="button" aria-label="Previous frame">‹</button>
+              <button id="nextFrame" type="button" aria-label="Next frame">›</button>
+            </div>
+            <div><strong id="frameNumber"></strong><span id="sampleTime"></span></div>
+          </div>
+          <dl class="frame-values">
+            <div><dt>Original displacement</dt><dd id="sampleRaw"></dd></div>
+            <div><dt>Selected band</dt><dd id="sampleBand"></dd></div>
+          </dl>
+          <span id="frameAnnouncement" class="visually-hidden" role="status"></span>
+        </section>
         <details class="roi-details" id="roiDetails"><summary><span id="roiSummary">No measurement region selected</span><span>Exact coordinates</span></summary><div class="roi-editor"><div class="roi-editor-label" id="roiEditorLabel">Measurement region · source pixels</div><label>X<input id="roiX" type="number" min="0" step="1"></label><label>Y<input id="roiY" type="number" min="0" step="1"></label><label>Width<input id="roiW" type="number" min="24" step="1"></label><label>Height<input id="roiH" type="number" min="24" step="1"></label><button id="applyRoi" type="button" class="button" disabled>Apply</button></div></details>
       </section>
       <section aria-label="Quantitative measurements" class="metrics-grid" id="metricsGrid"><article class="metric"><div class="metric-label">Dominant frequency <span>Hz</span></div><div class="metric-value" id="frequencyValue">—</div><p id="frequencyNote">Awaiting source measurement</p></article><article class="metric"><div class="metric-label">Sine-fit amplitude <span id="amplitudeUnit">px</span></div><div class="metric-value" id="amplitudeValue">—</div><p id="amplitudeNote">Original displacement signal</p></article><article class="metric"><div class="metric-label">Signal quality <span>ESTIMATE</span></div><div class="metric-value quality-value" id="qualityValue">—</div><p id="qualityNote">Texture and tracking agreement</p></article><article class="metric"><div class="metric-label">Free-decay damping <span>ζ</span></div><div class="metric-value" id="dampingValue">—</div><p id="dampingNote">Enable for an isolated ringdown</p></article></section>

@@ -2,7 +2,7 @@
 
 (() => {
   const $ = id => document.getElementById(id);
-  const state = { source: null, result: null, roi: null, reference: null, tool: 'roi', drag: null, busy: false, stale: false, raf: 0, currentTime: 0, mediaDuration: 0, analysisFps: 0, baseline: null };
+  const state = { source: null, result: null, roi: null, reference: null, tool: 'roi', drag: null, busy: false, stale: false, raf: 0, currentTime: 0, frameIndex: -1, mediaDuration: 0, analysisFps: 0, baseline: null };
   const original = $('originalVideo');
   const enhanced = $('enhancedVideo');
   const canvas = $('roiCanvas');
@@ -54,7 +54,8 @@
   }
   function clearResult() {
     stopPlayback();
-    state.result = null; state.stale = false; state.currentTime = 0;
+    state.result = null; state.stale = false; state.currentTime = 0; state.frameIndex = -1;
+    show('frameReadout', false); text('frameAnnouncement', '');
     $('analyzeButton').querySelector('span').textContent = 'Run measurement';
     original.removeAttribute('src'); original.load(); enhanced.removeAttribute('src'); enhanced.load();
     show('originalVideo', false); show('enhancedVideo', false); show('enhancedEmpty'); show('enhancementWatermark', false);
@@ -282,7 +283,8 @@
   });
   function renderResult(result, config) {
     if (!result || !result.metrics || !result.signal) throw new Error('The analysis response is missing measurements.');
-    state.result = result; state.result.uiSettings = config; state.stale = false; state.currentTime = 0;
+    state.result = result; state.result.uiSettings = config; state.stale = false; state.currentTime = 0; state.frameIndex = -1;
+    text('frameAnnouncement', '');
     const m = result.metrics, a = result.artifacts || {};
     state.analysisFps = Number(result.metadata?.fps) || config.fps_override || state.source.fps;
     state.mediaDuration = result.signal.time_s?.length ? result.signal.time_s[result.signal.time_s.length - 1] + 1 / state.analysisFps : state.source.duration;
@@ -318,12 +320,47 @@
     $('playButton').disabled = !a.original || !a.enhanced; $('timeline').disabled = !a.original; $('timeline').max = String(state.mediaDuration); $('timeline').value = 0;
     text('currentTime', timecode(0));
     [['exportCsv','csv'],['exportPlot','plot'],['exportReport','report']].forEach(([id,key]) => { if (a[key]) { $(id).href = a[key]; $(id).setAttribute('download', ''); $(id).classList.remove('disabled'); $(id).setAttribute('aria-disabled','false'); } });
+    show('frameReadout', Boolean(result.signal.time_s?.length));
+    updateFrameReadout();
     show('waveformEmpty', !result.signal.time_s?.length); show('spectrumEmpty', !result.signal.frequency_hz?.length);
     drawCharts(); drawRois();
   }
+  function updateFrameReadout() {
+    const signal = state.result?.signal;
+    const count = signal?.time_s?.length;
+    if (!count) return;
+    // Playback files are constant-rate encodes, with one image per measured sample.
+    const frame = Math.max(0, Math.min(count - 1, Math.floor(state.currentTime * state.analysisFps + 1e-7)));
+    if (frame === state.frameIndex) return;
+    state.frameIndex = frame;
+    text('frameNumber', `Frame ${frame + 1} of ${count}`);
+    text('sampleTime', `${fmt(signal.time_s[frame], 6)} s`);
+    text('sampleRaw', `${fmt(signal.raw_px?.[frame], 5)} px`);
+    text('sampleBand', `${fmt(signal.filtered_px?.[frame], 5)} px`);
+    $('previousFrame').setAttribute('aria-disabled', String(frame === 0));
+    $('nextFrame').setAttribute('aria-disabled', String(frame === count - 1));
+  }
+  function stepFrame(offset) {
+    if (!state.result || state.busy) return;
+    const frame = state.frameIndex + offset;
+    if (frame < 0 || frame >= state.result.signal.time_s.length) return;
+    stopPlayback();
+    // Seek inside the frame, away from rounded MP4 presentation boundaries.
+    seek((frame + .5) / state.analysisFps);
+    text('frameAnnouncement', [ $('frameNumber').textContent,
+      'Original displacement ' + $('sampleRaw').textContent,
+      'Selected band ' + $('sampleBand').textContent ].join('. '));
+  }
+  $('previousFrame').addEventListener('click', () => stepFrame(-1));
+  $('nextFrame').addEventListener('click', () => stepFrame(1));
+  for (const video of [original, enhanced]) {
+    video.addEventListener('loadedmetadata', () => {
+      if (state.result && state.currentTime > 0) video.currentTime = state.currentTime;
+    });
+  }
   function seek(time) {
     if (!state.result) return;
-    const duration = Math.max(0, state.mediaDuration - 1 / state.analysisFps);
+    const duration = Math.max(0, state.mediaDuration - .5 / state.analysisFps);
     const bounded = Math.max(0, Math.min(duration, time)); state.currentTime = bounded;
     if (original.readyState >= 1) original.currentTime = bounded;
     if (enhanced.readyState >= 1) enhanced.currentTime = bounded;
@@ -375,6 +412,7 @@
     for(let i=0;i<=5;i++)ctx.fillText((xmin+(xmax-xmin)*i/5).toFixed(1),area.x+area.w*i/5,area.y+area.h+9);
   }
   function drawWaveform() {
+    updateFrameReadout();
     const frame=chartFrame('waveform');if(!frame)return;
     const {ctx,area}=frame; const s=state.result?.signal;
     if(!s?.time_s?.length){axisLabels(ctx,area,0,1,-1,1);return;}
@@ -384,7 +422,7 @@
     axisLabels(ctx,area,0,xmax,ymin,ymax);
     ctx.save();ctx.beginPath();ctx.rect(area.x,area.y,area.w,area.h);ctx.clip();
     line(ctx,xs,raw,area,0,xmax,ymin,ymax,color.raw,1);line(ctx,xs,filtered,area,0,xmax,ymin,ymax,color.teal,1.4);
-    const x=area.x+state.currentTime/xmax*area.w;ctx.strokeStyle='#f1c580';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,area.y);ctx.lineTo(x,area.y+area.h);ctx.stroke();ctx.restore();
+    const x=area.x+xs[Math.max(0,state.frameIndex)]/xmax*area.w;ctx.strokeStyle='#f1c580';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,area.y);ctx.lineTo(x,area.y+area.h);ctx.stroke();ctx.restore();
     $('waveform')._plot={area,xmax};
   }
   function drawSpectrum() {
