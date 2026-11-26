@@ -6,8 +6,8 @@ import math
 import os
 import re
 import stat
-import tempfile
 from pathlib import Path
+from .publication import write_new
 
 ID = re.compile(r'^[a-f0-9]{32}$')
 ARTIFACTS = ('report.json', 'original.mp4', 'enhanced.mp4', 'heatmap.png', 'displacement.csv', 'measurement.png')
@@ -110,13 +110,7 @@ def publish(folder, name, value):
     raw = json.dumps(value, sort_keys=True, allow_nan=False).encode() + b'\n'
     if len(raw) > MAX_JSON:
         raise ValueError('Manifest exceeds limit')
-    fd, temp = tempfile.mkstemp(prefix='.history-', dir=folder)
-    try:
-        with os.fdopen(fd, 'wb') as out:
-            out.write(raw); out.flush(); os.fsync(out.fileno())
-        os.link(temp, folder / name)
-    finally:
-        os.unlink(temp)
+    write_new(folder / name, raw)
 
 
 def source_manifest(folder):
