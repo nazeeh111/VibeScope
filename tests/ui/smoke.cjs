@@ -41,6 +41,7 @@ const url = process.env.VIBESCOPE_URL || 'http://127.0.0.1:8765';
         `Frame ${index+1} of ${samples.length}`);
       const [t,raw,band]=samples[index];
       assert.equal(await page.locator('#sampleTime').innerText(),t.toFixed(6)+' s');
+      assert.equal(await page.locator('#sampleTime').getAttribute('datetime'),`PT${t.toFixed(6)}S`);
       assert.equal(await page.locator('#sampleRaw').innerText(),raw.toFixed(5)+' px');
       assert.equal(await page.locator('#sampleBand').innerText(),band.toFixed(5)+' px');
     }

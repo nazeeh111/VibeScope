@@ -335,6 +335,7 @@
     state.frameIndex = frame;
     text('frameNumber', `Frame ${frame + 1} of ${count}`);
     text('sampleTime', `${fmt(signal.time_s[frame], 6)} s`);
+    $('sampleTime').dateTime = `PT${fmt(signal.time_s[frame], 6)}S`;
     text('sampleRaw', `${fmt(signal.raw_px?.[frame], 5)} px`);
     text('sampleBand', `${fmt(signal.filtered_px?.[frame], 5)} px`);
     $('previousFrame').setAttribute('aria-disabled', String(frame === 0));
