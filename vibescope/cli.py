@@ -170,6 +170,7 @@ def main():
     else:
         import numpy as np
         from .anomaly import train_reference
+        from .publication import write_new
 
         if len(args.csvs) < 15:
             parser.error(
@@ -177,14 +178,17 @@ def main():
             )
         if args.output.exists() or args.output.is_symlink():
             parser.error("Reference output exists; choose a fresh output path.")
-        records = [
-            np.genfromtxt(p, delimiter=",", names=True)["raw_displacement_px"]
-            for p in args.csvs
-        ]
-        split = max(10, int(len(records) * 0.7))
-        model = train_reference(records[:split], records[split:], args.fps, args.scope)
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(model, indent=2))
+        try:
+            records = [
+                np.genfromtxt(p, delimiter=",", names=True)["raw_displacement_px"]
+                for p in args.csvs
+            ]
+            split = max(10, int(len(records) * 0.7))
+            model = train_reference(records[:split], records[split:], args.fps, args.scope)
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            write_new(args.output, json.dumps(model, indent=2, allow_nan=False).encode("utf-8"))
+        except (OSError, ValueError, KeyError) as error:
+            parser.error(str(error))
         print(args.output)
 
 

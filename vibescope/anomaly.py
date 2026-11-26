@@ -1,5 +1,6 @@
 """Healthy-reference novelty screening. It cannot identify damage or diagnose faults."""
 from __future__ import annotations
+import hashlib
 import json
 from pathlib import Path
 import numpy as np
@@ -35,10 +36,22 @@ def train_reference(training, calibration, fps, scope):
         raise ValueError('Use at least10 independent training and5 independent calibration recordings.100+ calibration recordings are recommended for tail estimates.')
     if not isinstance(scope,str) or not scope.strip() or len(scope)>512:
         raise ValueError('Describe the acquisition setup and region in a nonempty reference scope (up to512 characters).')
-    data=np.array([features(y,fps) for y in training])
+    seen = set()
+    rows = []
+    for record in training + calibration:
+        samples = np.asarray(record, dtype=np.float64)
+        row = features(samples, fps)
+        # Signed zero represents the same displacement in a measurement CSV.
+        canonical = np.where(samples == 0, 0.0, samples)
+        fingerprint = hashlib.sha256(canonical.tobytes()).digest()
+        if fingerprint in seen:
+            raise ValueError('Reference contains a repeated measurement series. Use independent recordings.')
+        seen.add(fingerprint)
+        rows.append(row)
+    data = np.array(rows[:len(training)])
     center=np.median(data,axis=0)
     scale=np.maximum(1.4826*np.median(abs(data-center),axis=0),[.02,.15,.015,.02])
-    scores=np.array([np.sqrt(np.mean(((features(y,fps)-center)/scale)**2)) for y in calibration])
+    scores=np.array([np.sqrt(np.mean(((row-center)/scale)**2)) for row in rows[len(training):]])
     lengths=[len(y) for y in training+calibration]
     return dict(version=1,scope=scope.strip(),fps=float(fps),sample_count_range=[min(lengths),max(lengths)],feature_names=FEATURE_NAMES,
                 center=center.tolist(),scale=scale.tolist(),threshold=float(np.quantile(scores,.99)),

@@ -67,3 +67,33 @@ def test_invalid_reference_and_inadequate_calibration_are_rejected(tmp_path):
         with pytest.raises(ValueError):features(values,60.)
     invalid=tmp_path/'bad.json';invalid.write_text('{bad json')
     with pytest.raises(ValueError):load_reference(invalid)
+
+
+@pytest.mark.parametrize("duplicate_in", ["training", "calibration", "both"])
+def test_reference_rejects_reused_measurement_series(duplicate_in):
+    training = [recording(i) for i in range(10)]
+    calibration = [recording(i) for i in range(20, 25)]
+    if duplicate_in == "training":
+        training[-1] = training[0].copy()
+    elif duplicate_in == "calibration":
+        calibration[-1] = calibration[0].copy()
+    else:
+        calibration[-1] = training[0].copy()
+    with pytest.raises(ValueError, match="repeated measurement"):
+        train_reference(training, calibration, 60, "synthetic bench")
+
+
+def test_complete_file_survives_staging_cleanup_failure(tmp_path, monkeypatch, caplog):
+    from vibescope import publication
+
+    def cleanup_denied(stage):
+        raise PermissionError("simulated cleanup error")
+
+    monkeypatch.setattr(publication.os, "unlink", cleanup_denied)
+    path = tmp_path / "reference.json"
+    publication.write_new(path, b'{"version": 1}')
+    assert json.loads(path.read_bytes()) == {"version": 1}
+    assert "output published" in caplog.text
+    with pytest.raises(FileExistsError):
+        publication.write_new(path, b'{}')
+    assert json.loads(path.read_bytes()) == {"version": 1}

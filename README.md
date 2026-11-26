@@ -65,7 +65,7 @@ validation. Existing recordings/results are preserved. To repeat, choose fresh
 - Confirm the **capture frame rate**, choose x/y displacement and a frequency band below Nyquist.
 - Inspect synchronized original/enhanced video, an activity map, raw/band-limited displacement and power spectrum.
 - Read the dominant response frequency, sine-fit peak amplitude, tracking quality and resolution. Amplitude is a fitted peak in pixels, not peak-to-peak motion or magnified display displacement. Enter an in-plane mm/px scale when independently calibrated.
-- Fit damping only for a declared isolated free ringdown. Screen novelty only against recordings from the same acquisition setup.
+- Fit damping only for a declared isolated free ringdown. Screen novelty only against recordings from the same acquisition setup. Reference fitting rejects repeated displacement series across training and calibration. Use independently acquired recordings even when the traces differ. Saving a new baseline preserves prior outputs and requires a filesystem with hard links.
 - Export CSV, plots, report JSON and videos. Every result retains parameters, source hash and evidence limitations.
 
 The app refuses invalid bands, poor tracking, detected variable-rate timing and output collisions. Existing source recordings and completed result folders are never overwritten.
