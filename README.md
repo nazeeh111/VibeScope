@@ -1,25 +1,21 @@
 # VibeScope
 
-**Measure the original. Magnify the view.**
+Track vibration in an original video, subtract a stationary reference, and compare the displacement with a magnified playback. The two synchronized views share one measured trace.
 
-Track image-plane vibration in local video, subtract a stationary reference, and inspect displacement and frequency together. Visualization gain changes playback, never the measured signal.
+[Run the controlled demo](#start-locally) · [Explore the recorded case](https://nazeeh111.github.io/work/vibescope/) · [Reopen saved work](#return-to-a-measurement) · [Measurement guide](docs/MEASUREMENT.md)
 
-[Explore the recorded case](https://nazeeh111.github.io/work/vibescope/) · [Run the controlled demo](#start-locally) · [Reopen saved work](#return-to-a-measurement) · [Measurement guide](docs/MEASUREMENT.md) · [Benchmark evidence](docs/BENCHMARKS.md)
-
-> **Research release.** Controlled synthetic validation is included. Independent physical calibration and fault-diagnostic validation are pending. Magnified images are visualizations; measurements come from original decoded frames.
-
-<a href="docs/presentation/measurement-story.svg">
 <picture>
-  <source media="(max-width: 600px)" srcset="docs/presentation/measurement-story-mobile.png">
-  <img src="docs/presentation/measurement-story.png" width="1000" alt="Actual controlled synthetic video before and after display magnification, beside identical original-frame displacement traces for gains 5 and 20 and a power spectrum peaking near 7.3 hertz.">
+  <source media="(max-width: 600px)" srcset="docs/presentation/frame-inspection-mobile.png">
+  <img src="docs/presentation/frame-inspection.png" width="1000" alt="VibeScope paused on frame 74 of its synthetic video. Original and magnified playback share the same frame. Displacement is −0.18515 px before filtering and −0.19000 px within the selected band.">
 </picture>
-</a>
 
-Two fresh measurements of the same packaged synthetic recording, using display gains **5 and 20**. Their complete **240-sample displacement arrays, quantitative metrics and exported CSV bytes match exactly**. The images show the same output frame at 1.2 seconds; nearest-neighbor enlargement adds no image detail. This is a controlled case, not physical validation. [Data, rendering and runtime provenance](docs/presentation/README.md).
+**Inspect frame 74.** Open the controlled demo and run the measurement. Scrub to 1.200 s, then choose **Next frame**. In the recorded run, sample time **1.216667 s** has original displacement **−0.18515 px** and selected-band displacement **−0.19000 px**. Open **Signal CSV** to check the `time_s`, `raw_displacement_px`, and `band_displacement_px` columns. Frame numbering starts at 1. The readout reports image-plane pixels even when a separate in-plane scale is supplied.
+
+The example uses generated motion. A physical displacement measurement needs independently confirmed capture timing and in-plane calibration. Fault-diagnostic validation remains pending.
 
 ## One recording, two display gains
 
-The packaged target has known **7.3 Hz, 0.28 px** image-plane translation plus camera motion. Both runs recovered **7.29996 Hz and 0.27989 px** after stationary-reference subtraction. Amplitude is the fitted sinusoidal peak in the original displacement, not peak-to-peak travel or the motion shown by the enhanced video.
+The [paired gain comparison](docs/presentation/measurement-story.svg) retains the two actual image/trace exports. The packaged target has known **7.3 Hz, 0.28 px** image-plane translation plus camera motion. Both runs recovered **7.29996 Hz and 0.27989 px** after stationary-reference subtraction. Amplitude is the fitted sinusoidal peak in the original displacement, not peak-to-peak travel or the motion shown by the enhanced video.
 
 | Operation | What remains inspectable |
 | --- | --- |
